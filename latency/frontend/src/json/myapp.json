@@ -1,0 +1,17 @@
+{
+    "media":{
+        "facebook": "https://www.facebook.com/",
+        "twitter": "https://www.twitter.com/",
+        "instagram": "https://www.instagram.com/",
+        "youtube": "https://www.youtube.com/"
+    },
+    "appinfo":{
+        "appname": "Text summarizer",
+        "bg_color": "bg-primary",
+        "f_color": "text-white",
+        "logo": "logo.png",
+        "logoHeight": 30,
+        "logoWidth": 35
+    }
+    
+    }

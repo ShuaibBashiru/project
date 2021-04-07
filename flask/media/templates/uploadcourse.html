@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="sidebarright" id="sidebarright">
+	<br>
+	<div class="slidecontent">
+        <div class="formdiv">
+                <p>Upload Course Registration</p>
+                <p class="successclass" id="message"></p>
+                <form id="coursefileupload" enctype="multipart/form-data">
+              <input type="hidden" name="id">
+              <table class="forminput">
+                  <tr>
+                    <td><select class="cid" name="cid" required>
+                    <option value="">Select class</option>
+                    </select></td>
+                    </tr>
+                    <tr>
+                    <td><select name="session" required>
+                    <option value="">Select Session</option>
+                    <option value="2018/2019">2018/2019</option>
+                    <option value="2019/2020">2019/2020</option>
+                    <option value="2020/2021">2020/2021</option>
+                    </select></td>
+                    </tr>
+                    <tr>
+                    <td><select name="semester" required>
+                    <option value="">Select Semester</option>
+                    <option value="First">First semester</option>
+                    <option value="Second">Second semester</option>
+                    </select></td>
+                    </tr>
+                    <tr>
+                        <td><input type="file" required name="filename" id="file" placeholder="Class name"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                <button type="submit" class="triggerBtn">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+                <p class="successclass" id="response"></p>
+                <input type="hidden" class="tdname">
+            <table class="itemlist" id="recordlist">
+        </table>
+            </div>
+	</div><!-- end of wrapperforcontent -->
+	</div>
+	</body>
+	</html>
+	{% endblock %}
