@@ -1,25 +1,27 @@
 {
 "media":{
-    "facebook": "https://www.facebook.com/",
-    "twitter": "https://www.twitter.com/",
-    "instagram": "https://www.instagram.com/",
-    "youtube": "https://www.youtube.com/",
-    "email": "info@xavimoore.com",
-    "phone": "+778-800-0048",
-    "address": "7th floor, 838 West Hastings St Vancouver, Canada"
+    "facebook": "https://www.facebook.com/yabatechpresige",
+    "twitter": "https://www.twitter.com/yabatechpresige",
+    "instagram": "https://www.instagram.com/yabatechpresige",
+    "youtube": "https://www.youtube.com/yabatechpresige",
+    "email": "info@yabatechprestige.org",
+    "phone": "+2348033110087, +2348023239531",
+    "address": "Yaba College of Technology, Yaba, Lagos, Nigeria"
 },
 "appinfo":{
-    "appname": "",
-    "displaynamecap": "XAVIMOORE",
-    "displaynamelower": "Xavimoore",
+    "appname": "YabatechPrestige",
+    "displaynamecap": "YABATECHPRESTIGE",
+    "displaynamelower": "YabatechPrestige",
+    "sloganslide": "Yabatech Prestige Cooperative Bridges The Gap",
     "bg_color": "bg-light",
     "css":{
         "headerbg": "background: #191b1f; box-shadow:2px 0px 0px 2px;",
+        "headercolor": "color:#ffffff",
         "sidebarbg": "background: #191b1f;"
     },
     "logo": "logo.png",
-    "logoHeight": 32,
-    "logoWidth": 110
+    "logoHeight": 40,
+    "logoWidth": 40
 }
 
 }

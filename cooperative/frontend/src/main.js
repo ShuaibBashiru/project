@@ -5,7 +5,6 @@ import App from './App'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import all from './js/all.js'
-import store from './store'
 import GeneralHeader from './layout/GeneralHeader'
 import GeneralFooter from './layout/GeneralFooter'
 Vue.component('GeneralHeader', GeneralHeader)
@@ -23,6 +22,5 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  store,
   render: h => h(App),
 }).$mount('#app')

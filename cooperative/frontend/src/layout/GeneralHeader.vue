@@ -11,11 +11,12 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <div style="border-top:1.5px solid #eee"></div>
     <ul class="navbar-nav m-0 p-0 ms-auto">
-    <li class="nav-item"> <a class="nav-link" href="/site/contact">PRODUCTS</a> </li>
-    <li class="nav-item"> <a class="nav-link" href="/site/contact">HOW IT WORKS</a> </li>
-    <li class="nav-item"> <a class="nav-link" href="/site/contact">COLLECTIONS</a> </li>
-    <li class="nav-item"> <a class="nav-link" href="/site/contact">BOOK A CONSULT</a> </li>
-    <li class="nav-item"> <a class="nav-link" href="/site/contact">CONTACT US</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#/site/contact">HOW IT WORKS</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#/site/contact">MEMBERS</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#/site/contact">SAVINGS</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#/site/contact">LOAN</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#/site/contact">COMMODITIES</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#/site/contact">TERMS & CONDITIONS</a> </li>
     </ul>
     <ul class="navbar-nav m-0 p-0 ms-auto">
     <li class="nav-item"> <a class="nav-link" href="/site/contact">CHAT US</a> </li>
