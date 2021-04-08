@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'api',
+    'forms',
+    'formupdate',
+    'file_generator',
 ]
 
 MIDDLEWARE = [
