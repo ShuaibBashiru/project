@@ -1,22 +1,21 @@
 <template>
   <div id="app">
-    <Layout/>
     <router-view/>
   </div>
 </template>
 
 <script>
-var layout=null;
+// var layout=null;
 import router from '@/router'
 router.beforeEach((to, from, next)=>{
-layout=to.meta.layout
+// layout=to.meta.layout
 document.title=to.meta.title
   next()
 })
 export default {
-      components:{
-    'Layout': ()=> import('./layout/'+layout+'.vue')
-    }
+//       components:{
+//  'Layout': ()=> import('./layout/'+layout+'.vue')
+//     }
 };
 </script>
 <style scope>

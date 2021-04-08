@@ -14,7 +14,10 @@ def auth_check_session(request):
                 'status': 'success',
                 'confirmed': 'success',
                 'msg': 'Active: {}'.format(request.session.get('userdata')),
-                'row': '{}'.format(request.session.get('userdata')),
+                'surname': request.session['userdata'][1],
+                'firstname': request.session['userdata'][2],
+                'email': request.session['userdata'][3],
+                'role': request.session['userdata'][5],
                 'classname': 'alert alert-primary p-1 text-center',
             }
         else:
@@ -105,8 +108,8 @@ def authenticate(request):
         pwd = request.POST['pwd']
         try:
             with connection.cursor() as cursor:
-                counter = cursor.execute("SELECT id, email_one, lastname, firstname, phone_one"
-                                         " FROM admin_record WHERE email_one=%s AND pwd_auth=%s AND pwd_auth IS NOT NULL", [userid, pwd])
+                counter = cursor.execute("SELECT id, surname, firstname, email_one, phone_one, account_type"
+                                         " FROM admin_record WHERE email_one=%s AND pwd_auth=%s", [userid, pwd])
                 row = cursor.fetchone()
                 if counter > 0:
                     feedback = {
@@ -132,11 +135,10 @@ def authenticate(request):
         except Exception as e:
             feedback = {
                 'status': 'unidentified',
-                'msg': 'Error connecting, now redirecting...',
+                'msg': 'Error!, refresh and try again',
                 'row': '',
                 'redirect': '/site/signin',
                 'classname': 'alert alert-danger p-1 text-center'
             }
-            print(e)
             return JsonResponse(feedback, safe=False)
         cursor.close()

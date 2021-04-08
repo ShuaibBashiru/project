@@ -1,59 +1,57 @@
 <template>
 <div>
-<div class="container-fluid">
-<div class="row border border-top-0 border-right-0 border-left-0 header">
-<div class="col-md">
-<nav :class="'navbar navbar-expand-lg p-1 ' + appinfo.bg_color">
-<a :class="'navbar-brand '+appinfo.f_color" href="/oath/dashboard"><img :src="require('@/assets/logo.png')" :width="appinfo.logoWidth" :height="appinfo.logoHeight"  alt="" class=""> &nbsp; {{appinfo.appname}}</a>
-<div class="navbar-toggler p-0" aria-expanded="false" aria-label="Toggle navigation">
-<div class="d-flex">
-<span  class="m-1"><div class="dp"></div></span>
-<span class="m-2 mr-0" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse">
-<i :class="'bi-list '+appinfo.f_color"></i>
+
+<div class="container-fluid header">
+<div class="row">
+<div class="col-md p-0" :style="appinfo.css.headerbg">
+<nav class="navbar navbar-expand-lg p-1 m-1 mt-0 mb-0">
+<a class="navbar-brand" href="/" :style="appinfo.css.headercolor"><img src="@/assets/logo.png" :width="appinfo.logoWidth" :height="appinfo.logoHeight"  alt=""> &nbsp; {{appinfo.appname}}</a>
+<span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<i class="bi-list text-white"></i>
 </span>
-</div>
-</div>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <div style="border-top:1.5px solid #eee"></div>
-<ul class="navbar-nav">
-    <li class="nav-item dropdown"> <a href="#" v-bind:class="'nav-link dropdown-toggle ' + appinfo.f_color" id="dropdownlink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quick Links</a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownlink1">
-        <li><a class="dropdown-item" href="#">Links</a></li>
-        <div class="dropdown-divider"></div>
-        <li class="nav-item p-2">Empty</li>
-        </ul>
-    </li>
-</ul>
-<ul class="navbar-nav ms-auto m-3 mt-0 mb-0">
+    <ul class="navbar-nav m-0 p-0 ms-auto">
+<div class="btn-group">
+  <li class="text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Quick Links
+  </li>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+    </ul>
+    <ul class="navbar-nav m-0 p-0 ms-auto">
+    <!-- <li class="nav-item"> <a class="nav-link" href="/site/contact">CHAT US</a> </li> -->
     <li class="nav-item p-1 pt-0 pb-0"> <a v-bind:class="'nav-link ' + appinfo.f_color" href="/site/logout">Sign Out</a> </li>
     <li class="nav-item p-1 pt-0 pb-0"><div class="dp"></div></li>
-</ul>
+    </ul>
 </div>
 </nav>
 </div>
 </div>
-
 </div>
-    <div class="col-md-2 sidebar p-1 border border-top-0 border-bottom-0 border-right-0">
-       <div class="input-group sticky-top">
+
+    <div class="col-md-2 sidebar p-2" :style="appinfo.css.sidebarbg">
+       <div class="input-group sticky-top mt-2">
            <input type="search" class="form-control" id="search-input" placeholder="Search menu" aria-label="Search for..." autocomplete="off">
        </div>
-      <ul class="list-group mt-4 pl-0 m-0 list-group-flush">
-    <li class="list-group-item active"><router-link to="/oath/dashboard" class="text-white">Menu</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/searchaccount"><i class="bi-search"></i> Search Account</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/admin"><i class="bi-person-plus-fill"></i> Admin Account</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/user"><i class="bi-person-plus"></i> User's Account</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/uploadlist"><i class="bi-upload"></i> Upload payment</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/transactions"><i class="bi-wallet2"></i> Transactions</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/patientaccount"><i class="bi-file-earmark-excel"></i> Create Report</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/market"><i class="bi-mailbox"></i> Loan </router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/market"><i class="bi-mailbox"></i> Commodities </router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/market"><i class="bi-mailbox"></i> Send Mail</router-link></li>
+      <ul class="list-group mt-4 list-group-flush">
+    <li class="list-group-item active border"><router-link to="/secure/dashboard" class="text-white"><i class="bi-list"></i> Menu</router-link></li>
+  <li class="list-group-item"><router-link class="" to="/secure/adminaccount"><i class="bi-person-plus-fill"></i> Admin Account</router-link></li>
+  <li class="list-group-item"><router-link class="" to="/secure/widget"><i class="bi-bricks"></i> Widgets</router-link></li>
+  <li class="list-group-item"><router-link class="" to="/secure/post"><i class="bi-file-post"></i> Posts</router-link></li>
+  <li class="list-group-item"><router-link class="" to="/secure/newsletter"><i class="bi-newspaper"></i> Newsletters </router-link></li>
+  <li class="list-group-item"><router-link class="" to="/secure/mailer"><i class="bi-mailbox"></i> Send Mail</router-link></li>
 </ul>
        <!-- layer one -->
-    </div>
 </div>
 
+</div>
 </template>
 <style scoped>
 .dp{
@@ -69,6 +67,26 @@
     width: 32px;
     height: 32px;
 }
+.navbar-nav .nav-item a{
+color:#ffffff;
+font-size: 14px;
+font-family: 'Geomanist book webfont',Arial,sans-serif;
+}
+.list-group-item{
+    background: none;
+    padding-left:4px;
+}
+.list-group-item a{
+    color: #ffffff;
+}
+
+.list-group-item i{
+    margin-right: 5px;
+}
+.active{
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
 </style>
 <script>
 import appsettings from '../json/myapp.json'
@@ -83,10 +101,6 @@ export default {
             pwd:'',
             classname:'',
         }
-    },
-    methods:{
-    
-       
     },
     // end of methods
 

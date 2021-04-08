@@ -3,15 +3,23 @@
     "facebook": "https://www.facebook.com/",
     "twitter": "https://www.twitter.com/",
     "instagram": "https://www.instagram.com/",
-    "youtube": "https://www.youtube.com/"
+    "youtube": "https://www.youtube.com/",
+    "email": "info@xavimoore.com",
+    "phone": "+778-800-0048",
+    "address": "7th floor, 838 West Hastings St Vancouver, Canada"
 },
 "appinfo":{
-    "appname": "YabatechPrestige",
+    "appname": "",
+    "displaynamecap": "XAVIMOORE",
+    "displaynamelower": "Xavimoore",
     "bg_color": "bg-light",
-    "f_color": "text-success",
+    "css":{
+        "headerbg": "background: #191b1f; box-shadow:2px 0px 0px 2px;",
+        "sidebarbg": "background: #191b1f;"
+    },
     "logo": "logo.png",
-    "logoHeight": 30,
-    "logoWidth": 35
+    "logoHeight": 32,
+    "logoWidth": 110
 }
 
 }

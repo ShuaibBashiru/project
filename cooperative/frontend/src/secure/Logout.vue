@@ -26,6 +26,8 @@ export default{
     },
     methods:{
  logout(){
+      this.alert='Logging out...'
+                      this.classname='alert-warning text-center p-1'
             axios.get('/auth/logout/')
             .then(response => {
                 if(response.data.status==response.data.confirmed){

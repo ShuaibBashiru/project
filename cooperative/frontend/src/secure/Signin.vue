@@ -4,7 +4,6 @@
 <div class="row d-flex justify-content-center">
     <div class="col-md-4 border p-5 rounded mt-2">
   <form @submit.prevent="signIn" role="form">
-    {{this.$store.state.isLoggedIn}}
   <div class="form-row">
 <div class="form-group col">
     <h2 class="text-primary">Sign in</h2>
@@ -16,13 +15,13 @@
 </div>
     <div class="form-group mt-4 col">
         <label for="userid" class="text-muted">UserID</label>
-        <input type="hidden" class="d-none" v-model="token" required>
+        <input type="hidden" v-model="token" required>
       <input type="email" class="form-control" v-model="userid" placeholder="Enter your email" id="userid" required maxlength="100" minlength="10">
     </div>
 
     <div class="form-group mt-3 col">
         <label for="pwd" class="text-muted">Password</label>
-      <input type="password" class="form-control" v-model="pwd" placeholder="Password" id="pwd" required maxlength="50" minlength="8">
+      <input type="password" class="form-control" v-model="pwd" placeholder="Password" id="pwd" required maxlength="50" minlength="3">
     </div>
 
     <div class="form-group mt-3">
@@ -67,45 +66,47 @@ import axios from 'axios'
 export default{
 data(){
   return{
-            token: null,
             info:[],
-            alert: null,
+            alert:'',
             progress:null,
             userid:null,
-            pwd: null,
-            classname: null,
-            selectedFile: null,
-            
+            pwd:'',
+            classname:'',
+            token:'',
+            selectedFile: null
          }
 
 },
 methods:{
-
 tokenize: function(){
-            const form = new FormData();
-            form.append('token', Math.random(9,99999))
-            axios.get('/auth/tokenize/',form)
-            .then(response => {
+             axios.get('/auth/tokenize/',{
+              params:{
+                'token': Math.random(9, 9999)
+              }
+            }
+            ).then(response => {
                 if(response.data.status==response.data.confirmed){
                 this.token=response.data.key
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
                 }else{
-                this.alert='Kindly refresh or try again later.'
+                this.alert='Kindly refresh page or try again later.'
                 }
               
             }).catch(()=>{
                 this.classname='alert alert-danger p-1 text-center'
-                this.alert='Kindly refresh or try again later.'
+                this.alert='Kindly refresh page or try again later.'
 
             })
         },
 
        signIn(){
-              const form = new FormData();
-              form.append('userid', this.userid)
-              form.append('pwd', this.pwd)
-              form.append('csrfmiddlewaretoken', this.token)
-              axios.post('/auth/sign_in/', form)
+                this.alert='Please wait...'
+                this.classname='alert-primary text-center p-1'
+              const fd = new FormData();
+              fd.append('userid', this.userid)
+              fd.append('pwd', this.pwd)
+              fd.append('csrfmiddlewaretoken', this.token)
+              axios.post('/auth/sign_in/', fd)
               .then(response => {
                 if(response.data.status==response.data.confirmed){
                 this.classname=response.data.classname
@@ -120,7 +121,7 @@ tokenize: function(){
               
             }).catch(()=>{
                 this.classname='alert alert-danger p-1 text-center'
-                this.alert='Error connecting.., try again.'
+                this.alert='Error connecting, please try again.'
 
             })
         },
@@ -131,8 +132,7 @@ tokenize: function(){
 // End of methods
 created(){
 this.tokenize()
-},
-
+}
 }
 
 </script>
