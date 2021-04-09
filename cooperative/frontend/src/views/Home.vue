@@ -44,14 +44,59 @@
             <h6 class="text-white">Members</h6>
             <p class="text-muted">Register or Sign In to get updates on our latest offers!</p>
                           </div>
-        <div class="col-md-4 mt-2 d-flex justify-content-end"> 
-              <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
-              <button type="button" class="btn btn-default text-white m-3 p-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Or</button>
-              <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign In</button>
+        <div class="col-md-4 mt-2 justify-content-end"> 
+              <div>
+                <button type="button" class="btn btn-success mt-2 col-md-4 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
+              <span class="btn btn-default mt-2 col-md-4 col-12 text-white p-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Or</span>
+              <button type="button" class="btn btn-success mt-2 col-md-4 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign In</button>
+              </div>
             </div>
        </div> 
 </div>
 </div>
+
+
+<!--  -->
+<div class="container-fluid mt-4 p-5 pt-0 pb-0">
+        <div class="border pb-2 pt-2">
+    <div class="row m-0">
+    <div class="col-md-4 mb-2 mt-4 text-center">
+         <img src="@/assets/collections/saving.jpeg" 
+                        class="img-responsive w-75" width=""
+                        height="200" alt=" ">
+                        <br clear="all">
+                        <div class="text-center description">
+                            <h3 class="p-1">Savings</h3>
+                            <p class="p-1">Registered members can save part of their salaries for the future</p>
+                        <button class="btn btn-primary">Save</button>
+                        </div>
+    </div>
+    <div class="col-md-4 mb-2 mt-4 text-center">
+         <img src="@/assets/collections/loan.png" 
+                        class="img-responsive w-75" width=""
+                        height="200" alt=" ">
+                        <br clear="all">
+                        <div class="text-center description">
+                            <h3 class="p-1">Loan</h3>
+                            <p class="p-1">The society offers to its members 0% Interest rate</p>
+                        <button class="btn btn-primary">Apply</button>
+                        </div>
+    </div>
+    <div class="col-md-4 mb-2 mt-4 text-center">
+         <img src="@/assets/collections/commodity.png" 
+                        class="img-responsive w-75" width=""
+                        height="200" alt=" ">
+                        <br clear="all">
+                        <div class="text-center description">
+                            <h3 class="p-1">Commodities</h3>
+                            <p class="p-1">The registered members can purchase stocks (goods) in lesser cost.</p>
+                        <button class="btn btn-primary">Apply</button>
+                        </div>
+    </div>
+            </div>
+            </div>
+</div>
+<!--  -->
 
 
 <!--  -->
@@ -65,7 +110,7 @@
                     <div class="row">
                         <Vslick v-bind="itemscroll">
 
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item1.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -74,7 +119,7 @@
                         </div>
                     </div>
                                                 
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item2.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -83,7 +128,7 @@
                         </div>
                     </div>
                             
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item3.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -93,7 +138,7 @@
                     </div>
 
                             
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item4.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -103,7 +148,7 @@
                     </div>
 
                             
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item5.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -113,7 +158,7 @@
                     </div>
 
                                                 
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item6.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -128,47 +173,6 @@
 </div>
 <!--  -->
 
-<!--  -->
-<div class="container mt-4 p-5 pt-0 pb-0">
-        <div class="border pb-2 pt-2">
-    <div class="row m-0">
-    <div class="col-md-4 mb-1 mt-2 text-center">
-         <img src="@/assets/collections/saving.jpeg" 
-                        class="img-responsive w-100" width=""
-                        height="200" alt=" ">
-                        <br clear="all">
-                        <div class="text-center description">
-                            <h3 class="p-1">Savings</h3>
-                            <p class="p-1">Registered members can save part of their salaries for the future</p>
-                        <button class="btn btn-primary">Save</button>
-                        </div>
-    </div>
-    <div class="col-md-4 mb-1 mt-2 text-center">
-         <img src="@/assets/collections/loan.png" 
-                        class="img-responsive w-100" width=""
-                        height="200" alt=" ">
-                        <br clear="all">
-                        <div class="text-center description">
-                            <h3 class="p-1">Loan</h3>
-                            <p class="p-1">The society offers to its members 0% Interest rate</p>
-                        <button class="btn btn-primary">Apply</button>
-                        </div>
-    </div>
-    <div class="col-md-4 mb-1 mt-2 text-center">
-         <img src="@/assets/collections/commodity.png" 
-                        class="img-responsive w-100" width=""
-                        height="200" alt=" ">
-                        <br clear="all">
-                        <div class="text-center description">
-                            <h3 class="p-1">Commodities</h3>
-                            <p class="p-1">The registered members can purchase stocks (goods) in lesser cost.</p>
-                        <button class="btn btn-primary">Apply</button>
-                        </div>
-    </div>
-            </div>
-            </div>
-</div>
-<!--  -->
 
 <!--  -->
 <div class="container-fluid mt-4 p-5 pt-0 pb-0">
@@ -184,7 +188,7 @@
 <p class="text-center text-muted">Some of our favourite commodities we have in closets</p>
                         </div>
                         <Vslick v-bind="itemscroll">
-                        <div class="col-md-3 mb-1 mt-2 box">
+                        <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item8.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -193,7 +197,7 @@
                         </div>
                     </div>
                                                 
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item9.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -202,7 +206,7 @@
                         </div>
                     </div>
                                                                     
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item13.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -212,7 +216,7 @@
                     </div>
 
                                                 
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item14.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -221,7 +225,7 @@
                         </div>
                     </div>
                             
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item10.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -241,7 +245,7 @@
                     </div>
 
                             
-                    <div class="col-md-3 mb-1 mt-2 box">
+                    <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item12.jpeg" 
                         class="img-responsive" width="250"
                         height="200" alt=""> <br clear="all">
@@ -347,7 +351,7 @@ export default{
                 useCSS:true,
                 autoplay:true,
                 centerMode:true,
-                centerPadding:'50',
+                centerPadding:'10',
                 responsive: [
             {
               breakpoint: 1024,
@@ -386,7 +390,7 @@ export default{
                 useCSS:true,
                 autoplay:true,
                 centerMode:true,
-                centerPadding:'50',
+                centerPadding:'10',
                 responsive: [
             {
               breakpoint: 1024,
