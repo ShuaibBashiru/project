@@ -24,19 +24,23 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Passport Number</th>
             <th>Name</th>
-            <th>Program</th>
-            <th>Department</th>
-            <th>School</th>
+            <th>Gender</th>
+            <th>Date Of Birth</th>
+            <th>Place Of Birth</th>
+            <th>Place Of issue</th>
         </tr>
     </thead>
     <tbody>
         <tr v-for="(d, index) in biodata" :key="index">
             <td>{{d[0]}}</td>
-            <td>{{d[1]}} {{d[2]}} {{d[3]}}</td>
-            <td>{{d[4]}}</td>
+            <td>{{d[1]}}</td>
+            <td>{{d[3]}} {{d[4]}}</td>
             <td>{{d[5]}}</td>
             <td>{{d[6]}}</td>
+            <td>{{d[7]}}</td>
+            <td>{{d[8]}}</td>
         </tr>
     </tbody>
 

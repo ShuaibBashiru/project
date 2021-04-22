@@ -1,18 +1,14 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core.files.storage import FileSystemStorage
 import pandas as pd
 import json
-from django.http import HttpResponse
-import datetime
+import datetime, time
 import random
 import csv as cv
 import sys
-from django.http import HttpResponse
 import pyttsx3
 import os
-from django.http import JsonResponse
 import speech_recognition as sr
-from django.core.files.storage import FileSystemStorage
 import openpyxl
 import face_recognition
 import xlrd
@@ -25,15 +21,12 @@ import urllib
 import cv2
 import numpy as np
 import matplotlib as plt
-import time
 from django.db import connection
 
 
 def bio_data(request, app_oath):
     with connection.cursor() as cursor:
-        counter = cursor.execute("SELECT userid, surname, firstname, othername, program, "
-                                 "department, school, LevelName FROM user_profile "
-                                    "ORDER BY userid DESC")
+        counter = cursor.execute("SELECT * FROM user_profile ORDER BY userid DESC")
         row = cursor.fetchall()
         if counter > 0:
             feedback = {
@@ -50,7 +43,6 @@ def bio_data(request, app_oath):
                 'classname': 'alert alert-danger p-1 text-center',
                  }
         return JsonResponse(feedback, safe=False)
-        cursor.close()
 
 
 def courses(request, app_oath):
@@ -188,8 +180,7 @@ def match_image(request, app_oath):
                 # check if it was a match
                 if result[0]:
                     with connection.cursor() as cursor:
-                        counter = cursor.execute("SELECT userid, surname, firstname, othername, program, "
-                                 "department, school, LevelName FROM user_profile "
+                        counter = cursor.execute("SELECT * FROM user_profile "
                                                  "WHERE userid=%s", [userid])
                         row = cursor.fetchone()
                         if counter > 0:

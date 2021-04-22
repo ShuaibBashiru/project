@@ -5,11 +5,11 @@ class BiodataUpload(models.Model):
     userid = models.CharField(max_length=100)
     passport = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    firstname = models.CharField(max_length=100)
     othername = models.CharField(max_length=100)
-    school = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    program = models.CharField(max_length=100)
+    sex = models.CharField(max_length=100)
+    dob = models.CharField(max_length=100)
+    placeOfbirth = models.CharField(max_length=100)
+    placeOfissue = models.CharField(max_length=100)
     date_time = models.DateTimeField(max_length=100)
 
     class Meta:

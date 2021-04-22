@@ -50,13 +50,13 @@
     <div class="table-responsive">
 <table id="user-table" class="table table-bordered nowrap" cellspacing="0">
     <tbody>
-       
-        <tr> <td>Passport: {{record[0]}}</td></tr>
-        <tr> <td>Name: {{record[1]}} {{record[2]}}</td></tr>
-        <tr> <td>Program: {{record[4]}}</td></tr>
-        <tr> <td>School: {{record[6]}}</td></tr>
 
-        
+        <tr> <td>Passport: {{record[1]}}</td></tr>
+        <tr> <td>Name: {{record[3]}} {{record[4]}}</td></tr>
+        <tr> <td>Gender: {{record[5]}}</td></tr>
+        <tr> <td>Date Of Birth: {{record[6]}}</td></tr>
+        <tr> <td>Place Of Birth: {{record[7]}}</td></tr>
+        <tr> <td>Place Of issue: {{record[8]}}</td></tr>
     </tbody>
 
 </table>

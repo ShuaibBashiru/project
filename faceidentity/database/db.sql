@@ -11,6 +11,22 @@
     date_time datetime (6),
     )
 
+
+CREATE TABLE user_profile(
+id int not null AUTO_INCREMENT,
+    passportNumber varchar(50) not null,
+    passport varchar(50) not null,
+    surname varchar(50) not null,
+    othername varchar(50),
+    sex varchar(50),
+    dob varchar(50),
+    placeOfbirth varchar(50),
+    placeOfissue varchar(50),
+    date_time datetime(6),
+    PRIMARY key(id)
+)
+
+
 CREATE TABLE studentInfo(
 id int not null AUTO_INCREMENT,
     matric varchar(100) not null,

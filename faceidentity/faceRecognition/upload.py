@@ -17,11 +17,11 @@ from django.db import connection
 
 
 def upload(request, app_oath):
+    res = ''
     if request.method == 'POST':
         form = request.FILES['image']
         fs = FileSystemStorage(location='frontend/src/assets/uploaded')
         fs.save(form.name, form)
-        print(form)
         res = upload_to_table()
     return JsonResponse(res)
 
@@ -33,14 +33,14 @@ def upload_to_table():
     failed = 0
     for f in data.itertuples():
         save_record = BiodataUpload()
-        save_record.userid = f.userid
-        save_record.passport = f.userid.replace('/', '')+'.png'
+        save_record.userid = f.passportNumber
+        save_record.passport = str(f.passportNumber)+'.png'
         save_record.surname = f.surname
-        save_record.firstname = f.firstname
         save_record.othername = f.othername
-        save_record.school = f.school
-        save_record.department = f.department
-        save_record.program = f.program
+        save_record.sex = f.sex
+        save_record.dob = f.dob
+        save_record.placeOfbirth = f.placeOfbirth
+        save_record.placeOfissue = f.placeOfissue
         save_record.date_time = datetime.datetime.now()
         save_record.save()
         success += 1
@@ -60,10 +60,10 @@ def upload_to_table():
         }
     os.unlink('frontend/src/assets/uploaded/biodata.csv')
     return feedback
-    cursor.close()
 
 
 def uploadcourses(request, app_oath):
+    res = ''
     if request.method == 'POST':
         form = request.FILES['image']
         fs = FileSystemStorage(location='frontend/src/assets/uploaded')
@@ -113,7 +113,6 @@ def upload_to_courses():
         }
     os.unlink('frontend/src/assets/uploaded/courses.csv')
     return feedback
-    cursor.close()
 
 
 def send_message(request, app_oath):
