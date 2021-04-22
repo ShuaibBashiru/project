@@ -4,7 +4,7 @@
 <div class="row border border-top-0 border-right-0 border-left-0 header">
 <div class="col-md">
 <nav :class="'navbar navbar-expand-lg p-1 ' + appinfo.bg_color">
-<a :class="'navbar-brand '+appinfo.f_color" href="/"><img src="" :width="appinfo.logoWidth" :height="appinfo.logoHeight"  alt="" class=""> &nbsp; {{appinfo.appname}}</a>
+<a :class="'navbar-brand '+appinfo.f_color" href="/"><img src="" :width="appinfo.logoWidth" :height="appinfo.logoHeight"  alt=" " class=""> &nbsp; {{appinfo.appname}}</a>
 <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 <i :class="'bi-list '+appinfo.f_color"></i>
 </span>
@@ -22,10 +22,6 @@
 </ul>
 
 <ul class="navbar-nav m-0 p-0 ms-auto">
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" href="#">Follow us on</a> </li>
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" target="_blank" v-bind:href="media.facebook"><i class="bi-facebook"></i></a> </li>
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" target="_blank" v-bind:href="media.twitter"><i class="bi-twitter"></i></a> </li>
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" target="_blank" v-bind:href="media.instagram"><i class="bi-instagram"></i></a> </li>
     <li class="nav-item"> <router-link v-bind:class="'nav-link ' + appinfo.f_color" to="/site/contact">Help(Chat)</router-link> </li>
 </ul>
 </div>

@@ -8,8 +8,8 @@
 
     <div class="col-md-10 mt-5 text-center">
           <div class="row d-flex justify-content-center">
-            <div class="col-md-3 m-1"><a class="nav-link btn btn-outline-secondary" target="_blank" href="#">About</a></div>
-            <div class="col-md-3 m-1"><a class="nav-link btn btn-primary" href="/oath/panel">Diagnosis</a></div>
+            <div class="col-md-3 m-1"><a class="nav-link btn btn-outline-secondary" href="/site/usercheck">Patient</a></div>
+            <div class="col-md-3 m-1"><a class="nav-link btn btn-primary" href="/oath/panel">Administrator</a></div>
         </div>
 
     </div>

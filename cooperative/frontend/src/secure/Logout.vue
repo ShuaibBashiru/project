@@ -1,59 +1,78 @@
 <template>
-<div>
-<div class="col-md-12 col-md-offset-2 maindiv">
-<div class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-6 justify-content-center">
-            <div v-bind:class="classname">{{alert}}</div>
-            <!-- Start of wrapper -->
+    <div>
+    <GeneralHeader/>
+<section v-if="loader==false">
+</section>
+<section v-else>
+   <div class="container-fluid">
+       <br clear="all/">
+       <br clear="all/">
+       <br clear="all/">
+       <br clear="all/">
+       <br clear="all/">
+       <div class="row mt-5">
+           <div class="col-12 mt-5 d-flex justify-content-center">
+<div class="lds-roller"><div></div><div></div><div></div></div>
+           </div>
+           <div class="col-12 mt-5 d-flex justify-content-center"><small></small></div>
+       </div>
+
+       <div class="row mt-5">
+           <div class="col text-center">
+               <p class="text-muted">{{message}}</p>
+
+               <section v-if="error_found==true">
+                   <a href="/site/signin/" class="btn btn-primary">Leave this page</a>
+                   <!-- <button class="btn btn-primary"></button> -->
+               </section>
+
+           </div>
+       </div>
+   </div>
+</section>
+
     </div>
-</div>
-
-</div>
-</div>
-</div>
 </template>
-
 <script>
-import axios from 'axios';
-export default{
-    data(){
-        return {
-            alert:null,
-            progress:null,
-            classname:''
-        }
-    },
+import axios from 'axios'
+export default {
+data(){
+    return{
+        message: 'Checking session status...',
+        statusMsg: null,
+        error_found: false,
+    }
+},
+created(){
+   this.logout(); 
+},
     methods:{
- logout(){
-      this.alert='Logging out...'
-                      this.classname='alert-warning text-center p-1'
-            axios.get('/auth/logout/')
-            .then(response => {
-                if(response.data.status==response.data.confirmed){
-                this.alert=response.data.msg
-                this.classname=response.data.classname
-                 setTimeout(function(){
-                window.location.href=response.data.redirect
-                },3000)
-                }else{
-                this.classname=response.data.classname
-                this.alert=response.data.msg
+            logout: function(){
+    axios.get('/auth/logout/')
+        .then(response => {
+            if(response.data.status==response.data.confirmed){
+                this.message = response.data.msg
+                this.error_found = false
+                localStorage.removeItem('userdata');
                 setTimeout(function(){
                 window.location.href=response.data.redirect
-                },3000)
-                }
-              
-            }).catch(()=>{
-                this.classname='alert alert-danger p-1 text-center'
-                this.alert='Error connecting..! Refresh to continue.'
+                },2000)
+            }else{
+                this.message = response.data.msg
+                this.error_found = false
+                localStorage.removeItem('userdata');
+                 setTimeout(function(){
+                window.location.href='/site/signin'
+                },2000)
+            }
+        }).catch(()=>{
+            this.message = 'Check network connection or reload this page'
+            this.error_found = true
+            sessionStorage.removeItem("userdata");  
 
-            })
-        },
+        })
     },
-    // end of methods
-    created(){
-        this.logout()
-    }
+
+}
 }
 </script>

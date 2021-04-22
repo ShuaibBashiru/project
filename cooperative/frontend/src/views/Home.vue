@@ -1,13 +1,13 @@
 <template>
-<div>
-    <GeneralHeader> </GeneralHeader>
+<div class="overflow-hidden">
+    <MenuHeader/>
 <div class="container-fluid pb-4" style="background:#0b0b12;">
 <div class="container">
 <br clear="all">
 <div class="row mt-5">
 <div class="col-md-3 mt-1 d-flex justify-content-center"><img src="@/assets/collections/loan.png" class="img-responsive mt-5 rounded" style="width:100%;" height="250" alt=""></div>
 <div class="col-md-6 mt-1 p-3 pt-0">
-    <h1 class="text-center text-white header-4">Our services<br> ensure Members are satisfied and happy </h1>
+    <h1 class="text-center text-white header-4">Yabatech Prestige <br>Multipurpose Cooperative Society</h1>
     <p class="text-center text-white mt-4"><typical
         :steps="[appinfo.sloganslide, 2000]"
         :loop="1"
@@ -35,16 +35,16 @@
 
 </div>
 <!-- end container-colored -->
-
+<br>
 <!--  -->
-<div class="container-fluid mt-4 p-5 pt-0 pb-0">
-<div class="rounded" style="background:#0b0b12;">
-           <div class="row p-2 m-0 mt-1">
+<div class="container-fluid mt-4 p-md-5 pt-md-0 pb-md-0">
+<div class="rounded pb-3 pt-2" style="background:#0b0b12;">
+           <div class="row p-2 m-0">
             <div class="col-md-8 mt-1">
             <h6 class="text-white">Members</h6>
             <p class="text-muted">Register or Sign In to get updates on our latest offers!</p>
                           </div>
-        <div class="col-md-4 mt-2 justify-content-end"> 
+        <div class="col-md-4 mt-3 justify-content-end"> 
               <div>
                 <button type="button" class="btn btn-success mt-2 col-md-4 col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
               <span class="btn btn-default mt-2 col-md-4 col-12 text-white p-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Or</span>
@@ -54,12 +54,14 @@
        </div> 
 </div>
 </div>
+<br>
+<!--  -->
 
 
 <!--  -->
-<div class="container-fluid mt-4 p-5 pt-0 pb-0">
-        <div class="border pb-2 pt-2">
-    <div class="row m-0">
+<div class="container-fluid mt-4 p-md-5 pt-md-0 pb-md-0">
+        <div class="pb-2 pt-2">
+    <div class="row m-0 mt-2">
     <div class="col-md-4 mb-2 mt-4 text-center">
          <img src="@/assets/collections/saving.jpeg" 
                         class="img-responsive w-75" width=""
@@ -97,19 +99,17 @@
             </div>
 </div>
 <!--  -->
+<br/>
 
-
-<!--  -->
-<div class="container-fluid mt-4 p-5 pt-0 pb-0">
+<div class="container-fluid mt-4 p-md-5 pt-md-0 pb-md-0">
         <div class="border pb-2">
                 <div class="row border-bottom p-0 m-0 bg-success text-white" style="">
                     <div class="col-md-10 p-0 m-0"><p class="text-left m-1">Featured | Commodities </p></div>
                     <div class="col-md-2 p-0 m-0 d-flex justify-content-end"><a href="" class="p-2 pb-1 mt-1 text-white">See All <i class="bi-arrow-right"></i></a></div>
                 </div>
 
-                    <div class="row">
+                    <div class="row mt-2">
                         <Vslick v-bind="itemscroll">
-
                     <div class="col-md-3 mb-2 mt-2 box">
                         <img src="@/assets/items/item1.jpeg" 
                         class="img-responsive" width="250"
@@ -173,16 +173,16 @@
 </div>
 <!--  -->
 
-
+<br>
 <!--  -->
-<div class="container-fluid mt-4 p-5 pt-0 pb-0">
+<div class="container-fluid mt-4 p-md-5 pt-md-0 pb-md-0">
         <div class="border pb-2">
                 <div class="row border-bottom p-0 m-0 bg-success text-white" style="">
                     <div class="col-md-10 p-0 m-0"><p class="text-left m-1">Commodities |</p></div>
                     <div class="col-md-2 p-0 m-0 d-flex justify-content-end"><a href="" class="p-2 pb-1 mt-1 text-white">See All <i class="bi-arrow-right"></i></a></div>
                 </div>
 
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col-12 mt-4">
                                         <h5 class="text-center">Organic Foods</h5>
 <p class="text-center text-muted">Some of our favourite commodities we have in closets</p>
@@ -260,7 +260,6 @@
             </div>
 </div>
 <!--  -->
-<br>
 <br>
 <!--  -->
 <!-- <div class="container-fluid mt-5 mb-5 p-5 pt-0 pb-0">

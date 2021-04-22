@@ -9,19 +9,20 @@
     "address": "Yaba College of Technology, Yaba, Lagos, Nigeria"
 },
 "appinfo":{
-    "appname": "YabatechPrestige",
+    "appname": "Company Name",
     "displaynamecap": "YABATECHPRESTIGE",
     "displaynamelower": "YabatechPrestige",
-    "sloganslide": "Yabatech Prestige Cooperative Bridges The Gap",
+    "sloganslide": "Doing Business With Human Face",
     "bg_color": "bg-light",
     "css":{
-        "headerbg": "background: #191b1f; box-shadow:2px 0px 0px 2px;",
-        "headercolor": "color:#ffffff",
-        "sidebarbg": "background: #191b1f;"
+        "headerbg": "background: #ffffff; box-shadow:1px 0px 0px 1px #ccc;",
+        "headercolor": "",
+        "sidebarbg": "background: #ffffff;",
+        "bodycolor": "color: black;"
     },
     "logo": "logo.png",
-    "logoHeight": 40,
-    "logoWidth": 40
+    "logoHeight": 32,
+    "logoWidth": 32
 }
 
 }

@@ -4,7 +4,20 @@ import router from './router'
 import App from './App'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import all from './js/all.js'
+
+import VueProgressBar from 'vue-progressbar'
+
+Vue.use(VueProgressBar, {
+  color: 'blue',
+  failedColor: 'red',
+  height: '2px'
+})
+
+import AccountActive from './auth/Active'
+import MenuHeader from './layout/MenuHeader'
+Vue.component('AccountActive', AccountActive)
+Vue.component('MenuHeader', MenuHeader)
+
 import GeneralHeader from './layout/GeneralHeader'
 import GeneralFooter from './layout/GeneralFooter'
 Vue.component('GeneralHeader', GeneralHeader)
@@ -17,7 +30,7 @@ import PanelHeader from './layout/GeneralHeader'
 import PanelFooter from './layout/GeneralFooter'
 Vue.component('PanelHeader',PanelHeader)
 Vue.component('PanelFooter', PanelFooter)
-Vue.use(VueAxios, axios, all, Vuex)
+Vue.use(VueAxios, axios, Vuex)
 Vue.config.productionTip = false
 
 new Vue({

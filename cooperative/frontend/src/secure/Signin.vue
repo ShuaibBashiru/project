@@ -1,18 +1,20 @@
 <template>
 <div>
-<div class="container-fluid">
+    <GeneralHeader/>
+     <br clear="all">
+<div class="container-fluid mt-5">
 <div class="row d-flex justify-content-center">
-    <div class="col-md-4 border p-5 rounded mt-2">
+    <div class="col-md-4 border p-5 pb-3 rounded mt-2">
   <form @submit.prevent="signIn" role="form">
   <div class="form-row">
 <div class="form-group col">
     <h2 class="text-primary">Sign in</h2>
-<!-- <p>to continue to your account</p> -->
 </div>
-<div class="form-group col">
 
+<div class="form-group col">
             <div v-bind:class="classname">{{alert}}</div>
 </div>
+
     <div class="form-group mt-4 col">
         <label for="userid" class="text-muted">UserID</label>
         <input type="hidden" v-model="token" required>
@@ -21,31 +23,38 @@
 
     <div class="form-group mt-3 col">
         <label for="pwd" class="text-muted">Password</label>
-      <input type="password" class="form-control" v-model="pwd" placeholder="Password" id="pwd" required maxlength="50" minlength="3">
+      <input :type="pass_type" class="form-control" v-model="pwd" placeholder="Password" id="pwd" required maxlength="50" minlength="3">
     </div>
+    <small class="text-danger">{{error}}</small>
 
     <div class="form-group mt-3">
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="remember">
-        <label class="form-check-label" for="remember">
-        Remember me
+        <input class="form-check-input" type="checkbox" id="showpass"
+           v-model="toggle"
+           true-value="yes"
+          false-value="no" @change="showpassword">
+        <label class="form-check-label" for="showpass">
+        <small>Show password</small>
         </label>
     </div>
   </div>
-  <div class="col-md-6 d-flex justify-content-end">
-   <a href="oath/forgot" class="text-right">
-        Forgotten password?
-      </a>
-  </div>
 </div>
     </div>
-      <div class="form-group mt-4 col">
-     <button type="submit" name="signin" class="btn btn-primary form-control">Sign in</button>
-    </div>
       <div class="form-group mt-5 col">
-        <p class="text-center">I do not have an Account? <a href="#oath/newaccount" class="text-right">
+     <div class="row">
+     <div class="col pt-1">
+       <small>        <a href="/secure/forgot" class="text-left">
+        Forgot password?
+      </a></small>
+     </div>
+       <div class="col d-flex justify-content-end">
+         <button type="submit" name="signin" class="btn btn-primary" :disabled="isDisabled">{{button}}</button></div>
+     </div>
+    </div>
+      <div class="form-group mt-4 col">
+        <p class="text-center">I do not have an Account? <a href="/#" class="text-right">
         Contact Admin
       </a></p>
       </div>
@@ -73,7 +82,12 @@ data(){
             pwd:'',
             classname:'',
             token:'',
-            selectedFile: null
+            btntxt: 'Sign In',
+            button: 'Sign In',
+            isDisabled: false,
+            error:'',
+            toggle:null,
+            pass_type:'password'
          }
 
 },
@@ -89,19 +103,19 @@ tokenize: function(){
                 this.token=response.data.key
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
                 }else{
-                this.alert='Kindly refresh page or try again later.'
+                this.classname='alert alert-danger p-1 text-center'
+                this.alert='Check network connection or reload this page'
                 }
               
             }).catch(()=>{
                 this.classname='alert alert-danger p-1 text-center'
-                this.alert='Kindly refresh page or try again later.'
-
+                this.alert='Check network connection or reload this page'
             })
         },
 
        signIn(){
-                this.alert='Please wait...'
-                this.classname='alert-primary text-center p-1'
+              this.button='Please wait...'
+              this.isDisabled=true
               const fd = new FormData();
               fd.append('userid', this.userid)
               fd.append('pwd', this.pwd)
@@ -111,27 +125,38 @@ tokenize: function(){
                 if(response.data.status==response.data.confirmed){
                 this.classname=response.data.classname
                 this.alert=response.data.msg
+                this.button=this.btntxt
+                this.isDisabled=true
+                this.error=''
                 setTimeout(function(){
                 window.location.href=response.data.redirect
                 },2000)
                 }else{
-                this.classname=response.data.classname
-                this.alert=response.data.msg
+                this.error=response.data.msg
+                this.button=this.btntxt
+                this.isDisabled=false
                 }
               
             }).catch(()=>{
-                this.classname='alert alert-danger p-1 text-center'
-                this.alert='Error connecting, please try again.'
-
+                this.error='Check network connection or reload this page'
+                this.button=this.btntxt
+                this.isDisabled=false
             })
         },
-
+    showpassword: function(){
+      if(this.toggle=="yes"){
+      this.pass_type = 'text'
+      }else{
+      this.pass_type = 'password'
+      }
+    }
 
 
 },
 // End of methods
 created(){
 this.tokenize()
+
 }
 }
 

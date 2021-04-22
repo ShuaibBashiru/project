@@ -17,30 +17,67 @@ routes:[
     path: '/',
     name:'Home',
     meta:{title:'Home'},
-    component: ()=> import('./views/Home.vue'),
+    component: ()=> import('./secure/Signin.vue'),
+},
+
+
+
+{
+    path: '/site/signin',
+    name:'signin',
+    meta:{title:'Sign In'},
+    component: ()=> import('./secure/Signin.vue'),
 },
 
 {
-    path: '/secure/admin',
-    name:'admin',
-    meta:{title:'Administrator'},
+    path: '/secure/dashboard',
+    name:'dashboard',
+    meta:{title:'Dashboard'},
     component: ()=> import('./secure/Dashboard.vue'),
 },
 
 {
-    path: '/secure/widget',
-    name:'widget',
+    path: '/site/auth-check',
+    name:'Validation',
+    meta:{title:'Loggin...'},
+    component: ()=> import('./auth/Auth-check.vue'),
+},
+
+
+{
+    path: '/site/logout',
+    name:'logout',
+    meta:{title:'Admin account'},
+    component: ()=> import('./secure/Logout.vue'),
+},
+
+
+{
+    path: '/secure/newwidget',
+    name:'newwidget',
+    meta:{title:'New Widgets'},
+    component: ()=> import('./forms/newwidget.vue'),
+},
+{
+    path: '/secure/widgets',
+    name:'Widgets',
     meta:{title:'Widgets'},
-    component: ()=> import('./secure/Widget.vue'),
+    component: ()=> import('./api/Widgets.vue'),
+},
+{
+    path: '/secure/updatewidget/:title/:id',
+    name:'updatewidget',
+    meta:{title:'Update widget'},
+    component: ()=> import('./formsupdate/updatewidget.vue'),
 },
 
 {
-    path: '/secure/adminaccount',
-    name:'adminaccount',
-    meta:{title:'Admin account'},
-    component: ()=> import('./secure/Adminaccount.vue'),
+    path: '/secure/deletewidget/:title/:id',
+    name:'deletewidget',
+    meta:{title:'delete widget'},
+    component: ()=> import('./formsdelete/deletewidget.vue'),
+ 
 },
-
 
 
 

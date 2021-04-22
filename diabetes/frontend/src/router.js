@@ -47,11 +47,12 @@ routes:[
     meta:{layout:'GeneralHeader', title: 'Sign In'},
     component: ()=> import('./secure/Signin.vue')
 },
+
 {
-    path: '/oath/dashboard',
-    name: 'dashboard',
-    meta: {layout:'SidebarNoOath', title: 'Dashboard'},
-    component: ()=> import('./secure/Dashboard.vue')
+    path: '/site/usercheck',
+    name:'usercheck',
+    meta:{layout:'GeneralHeader', title:'usercheck',},
+    component: ()=> import('./secure/Usercheck.vue')
 },
 {
     path: '/oath/panel',
@@ -67,12 +68,6 @@ routes:[
     component: ()=> import('./secure/Export.vue')
 },
 
-{
-    path: '/oath/function_one',
-    name: 'function_one',
-    meta: {layout:'SidebarNoOath', title: 'function_one'},
-    component: ()=> import('./secure/Function_one.vue')
-},
 {
     path: '/oath/traindata',
     name: 'Traindata',

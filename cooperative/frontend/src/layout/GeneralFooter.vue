@@ -1,6 +1,6 @@
 <template>
     <div>   
-    <div class="container-fluid mt-4 p-5 pt-3 pb-0 footer" style="background:#0b0b12;">
+    <div class="container-fluid mt-4 p-md-5 pt-md-0 pb-md-0 footer" style="background:#0b0b12;">
         <div class="">
         <div class="row">
             <div class="col-md-4 mt-4"> 

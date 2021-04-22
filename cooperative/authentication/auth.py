@@ -5,30 +5,39 @@ import os, time, json, sys, serial, random, datetime
 import numpy as np
 from django.db import connection
 from django.middleware import csrf
+from authentication.writer import write_error
+from authentication.query_columns import dictfetchall
 
 
 def auth_check_session(request):
     try:
         if 'userdata' in request.session:
+            userdata = {
+                'surname': request.session['userdata']['surname'],
+                'firstname': request.session['userdata']['firstname'],
+                'othername': request.session['userdata']['othername'],
+                'email_one': request.session['userdata']['email_one'],
+                'phone_one': request.session['userdata']['phone_one'],
+                'role': request.session['userdata']['account_type'],
+            }
             feedback = {
                 'status': 'success',
                 'confirmed': 'success',
-                'msg': 'Active: {}'.format(request.session.get('userdata')),
-                'surname': request.session['userdata'][1],
-                'firstname': request.session['userdata'][2],
-                'email': request.session['userdata'][3],
-                'role': request.session['userdata'][5],
+                'msg': 'You are welcome! Now redirecting ...',
+                'redirect': '/secure/dashboard',
+                'userdata': userdata,
                 'classname': 'alert alert-primary p-1 text-center',
             }
         else:
             feedback = {
                 'status': 'failed',
-                'msg': 'Your session has expired',
+                'msg': 'Your session has expired, now redirecting...',
                 'row': '',
                 'redirect': '/site/logout',
                 'classname': 'alert alert-danger p-1 text-center',
             }
-    except:
+    except Exception as e:
+        write_error('auth_check_session', e)
         feedback = {
             'status': 'unidentified',
             'msg': 'Error connecting, now redirecting...',
@@ -46,12 +55,13 @@ def logout_session(request):
             feedback = {
                 'status': 'success',
                 'confirmed': 'success',
-                'msg': 'Logging you out, redirecting...',
+                'msg': 'Logging you out...',
                 'row': '',
                 'redirect': '/site/signin',
                 'classname': 'alert alert-danger p-1 text-center',
             }
-        except:
+        except Exception as e:
+            write_error('logout_session', e)
             feedback = {
                 'status': 'unidentified',
                 'msg': 'Error connecting, now redirecting...',
@@ -80,9 +90,10 @@ def token_nizer(request):
             'confirmed': 'success',
             'msg': '',
             'key': '{}'.format(tokenizer),
-            'classname': 'alert alert-dange  r p-1 text-center',
+            'classname': 'alert alert-danger  r p-1 text-center',
         }
-    except:
+    except Exception as e:
+        write_error('token_nizer', e)
         feedback = {
             'status': 'unidentified',
             'msg': 'Error connecting, now redirecting...',
@@ -97,8 +108,8 @@ def authenticate(request):
     if request.method != "POST":
         feedback = {
             'status': 'Failed',
-            'msg': 'Invalid request, try again',
-            'row': '',
+            'msg': 'Something went wrong, kindly reload this page',
+            'result': '',
             'redirect': '/site/signin',
             'classname': 'alert alert-danger p-1 text-center',
         }
@@ -106,39 +117,52 @@ def authenticate(request):
     else:
         userid = request.POST['userid']
         pwd = request.POST['pwd']
+        activeid = str(int(round(time.time() * 1000)))
         try:
             with connection.cursor() as cursor:
-                counter = cursor.execute("SELECT id, surname, firstname, email_one, phone_one, account_type"
-                                         " FROM admin_record WHERE email_one=%s AND pwd_auth=%s", [userid, pwd])
-                row = cursor.fetchone()
+                counter = cursor.execute("SELECT id, surname, firstname, othername, email_one, phone_one, account_type"
+                                         " FROM admin_record WHERE email_one=%s AND pwd_auth=%s LIMIT 1", [userid, pwd])
+                row = dictfetchall(cursor)
                 if counter > 0:
+                    request.session['userdata'] = row[0]
+                    request.session['activeid'] = activeid
+                    request.session['sessionHash'] = activeid+str(row[0]['email_one']).lower()
+                    userdata = {
+                        'surname': request.session['userdata']['surname'],
+                        'firstname': request.session['userdata']['firstname'],
+                        'othername': request.session['userdata']['othername'],
+                        'email_one': request.session['userdata']['email_one'],
+                        'phone_one': request.session['userdata']['phone_one'],
+                        'role': request.session['userdata']['account_type'],
+                        }
                     feedback = {
                         'status': 'success',
                         'confirmed': 'success',
                         'msg': 'Authentication successful, redirecting..',
-                        'row': row,
-                        'redirect': '/oath/dashboard',
+                        'result': userdata,
+                        'redirect': '/site/auth-check/?info='+str(row[0]['email_one']).lower()+'id='+activeid,
                         'classname': 'alert alert-primary p-1 text-center',
                     }
-                    request.session['userdata'] = row
                     return JsonResponse(feedback, safe=False)
                 else:
                     feedback = {
                         'status': 'failed',
-                        'confirmed': 'no',
-                        'msg': 'Invalid login credentials',
-                        'row': '',
-                        'redirect': '/sign/signin',
+                        'confirmed': 'failed',
+                        'msg': 'Invalid input! Check your details and try again.',
+                        'result': '',
+                        'redirect': '/site/signin',
                         'classname': 'alert alert-danger p-1 text-center',
                     }
                     return JsonResponse(feedback, safe=False)
         except Exception as e:
+            write_error('authenticate', e)
             feedback = {
                 'status': 'unidentified',
-                'msg': 'Error!, refresh and try again',
-                'row': '',
+                'msg': 'Something went wrong, kindly reload this page',
+                'result': '',
                 'redirect': '/site/signin',
                 'classname': 'alert alert-danger p-1 text-center'
             }
-            return JsonResponse(feedback, safe=False)
-        cursor.close()
+        finally:
+            cursor.close()
+    return JsonResponse(feedback, safe=False)

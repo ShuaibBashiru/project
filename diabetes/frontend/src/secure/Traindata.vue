@@ -8,10 +8,9 @@
 <div class="row form-inline mb-3  d-flex justify-content-end">
 <div class="col-md-4 mt-2 ">
     <div class="input-group">
-    <button class="btn btn-secondary">Iteration</button>
-    <input type="number" v-model="runtime" min="1" maxlength="4" class="form-control" placeholder="Number" value="1">
+    <!-- <button class="btn btn-secondary">Iteration</button>
+    <input type="number" v-model="runtime" min="1" maxlength="4" class="form-control" placeholder="Number" value="1"> -->
     <!-- <button class="btn btn-primary" @click="trainData">Create Model</button> -->
-
 </div>
 </div>
 

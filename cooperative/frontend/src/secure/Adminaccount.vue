@@ -1,5 +1,6 @@
 <template>
 <div>
+    
     <AdminHeader/>
 <div class="col-md-10 col-md-offset-2 maindiv">
 <div class="col m-2 mt-0 mb-1"><div v-bind:class="classname">{{alert}}</div></div>

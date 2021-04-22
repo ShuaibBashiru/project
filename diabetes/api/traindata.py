@@ -107,37 +107,43 @@ def train_data(request):
     return JsonResponse(feedback, safe=False)
 
 
-def model_analysis():
+def classify(request):
+    try:
+        X_test = [[float(request.POST['glucose']), float(request.POST['bloodPressure']),
+                   float(request.POST['skinThickness']), float(request.POST['insulin']),
+                   float(request.POST['bmi']), float(request.POST['pedigree']),
+                   float(request.POST['age'])]]
+        filename = "frontend/src/assets/plots/svmmodel.pkl"
+        classifer = joblib.load(filename)
+        result = classifer.predict(X_test)
+        res=int(result[0])
+        if res == 0:
+            msg = "Congrats! You do not have Diabetics"
+            result = ""
+            classname = "alert alert-primary p-1 text-center"
+        else:
+            msg = "Oops! You are Diabetic, Kindly read the instruction below"
+            result = "Please note that making healthier food choices is important to" \
+                      " manage your diabetes and to reduce your risk" \
+                      " of diabetes complications." \
+                      " It’s important you " \
+                      " see your dietitian for specific advice."
+            classname = "alert alert-danger p-1 text-center"
+        feedback = {
+            'status': 'success',
+            'confirmed': 'success',
+            'msg': msg,
+            "result": result,
+            'classname': classname,
+        }
 
-    xgb_pred = xgb_model.predict(X_test)
-    xgb_accuracy = metrics.accuracy_score(y_test, xgb_pred)
-    xgb_report = metrics.precision_recall_fscore_support(y_test, xgb_pred)
-    xgb_dic_report = {
-        "algorithm": 'XGBoost(Gradient Boost)',
-        "accuracy": str(xgb_accuracy.round(2)),
-        "precision": str(xgb_report[0][0].round(2)),
-        "recall": str(xgb_report[1][0].round(2)),
-        "f1_score": str(xgb_report[2][0].round(2)),
-        "support": str(xgb_report[3][0])
-    }
+    except Exception as e:
+        feedback = {
+            'status': 'Failed',
+            'msg': 'Error classifying data or the input is not valid, please try again',
+            'classname': 'alert alert-danger p-1 text-center',
+        }
+        print(e)
+    return JsonResponse(feedback, safe=False)
 
 
-
-def svm(X_train, y_train):
-    # SVM_MODEL
-    svm_model = SVC()
-    svm_model.fit(X_train, y_train)
-    svm_pred = svm_model.predict(X_test)
-    svm_accuracy = metrics.accuracy_score(y_test, svm_pred)
-    return JsonResponse(classification_report(y_test, svm_pred), safe=False)
-    # ENd
-
-
-def lgr(X_train, y_train):
-    lgr_model = LogisticRegression()
-    lgr_model.fit(X_train, y_train)
-    lgr_pred = lgr_model.predict(X_test)
-    lgr_accuracy = metrics.accuracy_score(y_test, lgr_pred)
-    print('LGR', classification_report(y_test, lgr_pred))
-    return JsonResponse(classification_report(y_test, lgr_pred), safe=False)
-    # ENd
