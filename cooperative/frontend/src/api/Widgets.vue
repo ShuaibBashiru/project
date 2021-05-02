@@ -1,8 +1,7 @@
 
 <template>
-<div>
+<div :style="opacity">
 <AdminHeader>
-<section v-if="loader==false">
     <div class="container">
         <div class="row">
             <div class="col m-2 mt-0 mb-1">
@@ -14,24 +13,25 @@
 <div class="row">
 <div class="col-md-4">
 <div class="p-1 pb-0 ml-0 pl-0">
-    <h5 class="mt-2 text-primary"><i class="bi-person-plus" style="font-size: 1.5rem;"></i> Widgets </h5>
+    <h5 class="mt-2 text-primary"> Widgets </h5>
 </div>
 </div>
 <div class="col-md-8 p-0 d-flex justify-content-end">
 <div class="btn-toolbar m-1" role="toolbar" aria-label="Toolbar with button groups">
-<div class="btn-group m-2" role="group" aria-label="First group"><a href="#" class="btn text-center">  {{counter}} </a></div>
-<div class="btn-group m-2" role="group" aria-label="First group"><a href="/secure/newwidget" class="btn btn-outline-primary text-center">  <i class="bi-plus"></i> New </a></div>
-<div class="btn-group m-2" role="group" aria-label="First group"><a href="#" class="btn btn-outline-secondary text-center" @click="preview">  <i class="bi-arrow-clockwise"></i> Refresh </a></div>
-<div class="btn-group m-2" role="group" aria-label="First group"><a href="#" class="btn btn-outline-primary text-center dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Menu </a>
+<div class="btn-group m-2" title="New" role="group" aria-label="First group"><a href="#" class="text-center btn btn-default">  {{counter}} </a></div>
+<div class="btn-group m-2" title="" role="group" aria-label="First group"><a href="/secure/newwidget" class="btn btn-outline-primary text-center">  <i class="bi-plus" style="font-size: 1rem;"></i> New </a></div>
+<div class="btn-group m-2" title="Menu" role="group" aria-label="First group"><a href="#" class="btn btn-outline-secondary text-center dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Menu </a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item active" href="#">Records</a></li>
+    <li class="p-2 pb-0 pt-0"><strong>Records</strong> </li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="listcounter">Update status</a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item active" href="#">Download</a></li>
+    <li class="p-2 pb-0 pt-0"><strong>Download</strong> </li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="#" @click="downloadfile" data-bs-toggle="modal" data-bs-target="#downloadbox">Excel</a></li>
   </ul></div>
+<div class="btn-group m-2" title="Refresh" role="group" aria-label="First group"><a href="#" class="btn btn-outline-primary text-center" @click="preview">  <i class="bi-arrow-clockwise" style="font-size: 1rem;"></i> </a></div>
+
 </div>
 
 </div>
@@ -50,8 +50,7 @@
             <div class="col-md-5">
                 <div class="m-1">
                 <div class="input-group">
-                    <button type="button" class="btn btn-outline-info">Filter by:</button>
-                    
+                    <span class="input-group-text">Filter</span>
                    <select @change="filter()" v-model="filterlist" class="form-control" id="fitler">
                        <option disabled value="" selected>Select</option>
                        <option value="1">Active</option>
@@ -66,7 +65,7 @@
          <div class="col-md-5">
                 <div class="m-1">
                 <div class="input-group">
-                    <button type="button" class="btn btn-outline-info">Search by:</button>
+                    <span class="input-group-text">Search</span>
                     <input type="text" name="search" v-model="search" maxlength="100" class="form-control" required placeholder="Type here">
                 </div>
                 <small class="form-text text-muted"></small>
@@ -134,24 +133,6 @@
     </div>
     </div>
 
-
-
-</section>
-<section v-else>
-   <div class="container-fluid">
-       <div class="row mt-5 text-center ">
-           <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
-<div class="lds-roller" :style="'display:'+loaderstatus"><div></div><div></div><div></div></div>
-           </div>
-           <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
-   <p class="lead mt-2" style="line-height:1.5">{{norecord}}</p>
-           </div>
- <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
-<p class="m-2" @click="$router.go(-1)" :style="'display:'+backbtn"><a href="#" class="btn btn-outline-primary text-center">  <i class="bi-arrow-left"></i> Back </a></p>
-           </div>
-       </div>
-   </div>
-</section>
 </AdminHeader>
 
 <!-- Modal container -->
@@ -173,7 +154,7 @@
                     <input type="hidden" class="form-control d-none" v-model="get_list_array">
                     <p class="">You are updating <strong>{{selectedlist}}</strong> record(s)</p>
                 <div class="input-group">
-                    <button type="button" class="btn btn-outline-info">Status</button>
+                    <span class="input-group-text">Status</span>
                    <select v-model="listStatus" class="form-control" id="fitler" required>
                        <option disabled value="" selected>Select</option>
                        <option value="1">Active</option>
@@ -267,13 +248,13 @@ export default {
         searchbtn:'Search',
         searchbtntxt:'Search',
         isDisabled: false,
-        opacity:'opacity:1;',
+        opacity_enable:'opacity:0.5; pointer-events:None;',
+        opacity_disable:'opacity:1; pointer-events:All;',
+        opacity:'',
         error_btn: null,
         errormodal: null,
         record:false,
         norecord:'',
-        loaderstatus:'',
-        backbtn:'none',
         counter:'0'
     }
     },
@@ -295,7 +276,9 @@ export default {
     e.preventDefault();
     },
     updateStatus: function(){
-        this.start()
+        this.$Progress.start()
+        this.isDisabled = true
+        this.submit='Please wait..'
         const form = new FormData();
         form.append('listStatus', this.listStatus)
         form.append('keyid', this.get_list_array)
@@ -306,46 +289,61 @@ export default {
         this.classnamemodal=response.data.classname
         this.alertmodal=response.data.msg
         this.submit=this.submittxt
+        this.$Progress.finish()
+        this.isDisabled = false
         this.unselectAll();
         this.preview()
-        this.finish()
         }else{
         this.classnamemodal=response.data.classname
         this.alertmodal=response.data.msg
         this.submit=this.submittxt
-        this.finish()
+        this.$Progress.finish()
+        this.isDisabled = false
 
         }
     }).catch(()=>{
         this.classnamemodal='alert alert-danger p-1 text-center'
         this.alertmodal='Check network connection or reload this page'
         this.submit=this.submittxt
-        this.finish()
+        this.$Progress.fail()
+        this.isDisabled = false
 
     })  
     },
 
     tokenize: function(){
-    const form = new FormData();
-    form.append('token', Math.random(9,99999))
-    axios.get('/auth/tokenize/',form, {
-    }).then(response => {
-        if(response.data.status==response.data.confirmed){
-        this.token=response.data.key
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
-        }else{
-        this.alert='Check network connection or reload this page'
-        }
-        
-    }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
-       this.alert='Check network connection or reload this page'
+        this.$Progress.start()
+      this.isDisabled = true
+    axios.get('/auth/tokenize/',{
+    params:{
+      'token': Math.random(9, 9999)
+    }
+  }).then(response => {
+      if(response.data.status==response.data.confirmed){
+      this.token=response.data.key
+      axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
+        this.$Progress.finish()
+      this.isDisabled = false
+      }else{
+      this.$Progress.fail()
+      this.isDisabled = false
+      this.classname='alert alert-danger p-1 text-center'
+      this.alert='Check network connection or reload this page'
+      }
+    
+  }).catch(()=>{
+        this.$Progress.finish()
+      this.isDisabled = false
+      this.classname='alert alert-danger p-1 text-center'
+      this.alert='Check network connection or reload this page'
+  })
+  },
 
-    })
-    },
 
     preview: function(){
-        this.start()
+        this.$Progress.start()
+        this.isDisabled = true
+        this.opacity = this.opacity_enable
         axios.get('/api/widget/',{})
         .then(response => {
             if(response.data.status == response.data.confirmed){
@@ -354,25 +352,112 @@ export default {
             this.info = response.data.result
             this.counter = 'Total: '+ this.info.length
             this.record = true
-            this.loader=false
-            this.finish()
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
             }else{
             this.record = false
             this.counter = 'Total: 0'
             this.alert=''
             this.norecord=response.data.msg
             this.classname=''
-            this.loader=false
-            this.finish()
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
             }
         
         }).catch(()=>{
-            this.fail()
-            this.loader=false
+            this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
             this.classname='alert alert-danger p-1 text-center'
             this.alert='Check network connection or reload this page'
+            this.$Progress.fail()
+            this.isDisabled = true
+            this.opacity = this.opacity_disable
+        })
+    },
+
+       filter: function(){
+        this.$Progress.start()
+        this.isDisabled = true
+        this.opacity = this.opacity_enable
+       axios.get('/api/widgetfilter/', {
+            params:{
+                'status_id': this.filterlist
+            }
+        })
+        .then(response => {
+            if(response.data.status == response.data.confirmed){
+            this.alert=''
+            this.classname=''
+            this.info = response.data.result
+            this.counter = 'Total: '+ this.info.length
+            this.record = true
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            }else{
+            this.record = false
+            this.counter = 'Total: 0'
+            this.alert=''
+            this.norecord=response.data.msg
+            this.classname=''
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            }
+        
+        }).catch(()=>{
+            this.record = false
+            this.norecord=''
+            this.counter = 'Total: 0'
+            this.classname='alert alert-danger p-1 text-center'
+            this.alert='Check network connection or reload this page'
+            this.$Progress.fail()
+            this.isDisabled = true
+            this.opacity = this.opacity_disable
+        })
+    },
+       searchby: function(){
+        this.$Progress.start()
+        this.isDisabled = true
+        this.opacity = this.opacity_enable
+       axios.get('/api/widgetsearch/', {
+            params:{
+                'search': this.search
+            }
+        })
+        .then(response => {
+            if(response.data.status == response.data.confirmed){
+            this.alert=''
+            this.classname=''
+            this.info = response.data.result
+            this.counter = 'Total: '+ this.info.length
+            this.record = true
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            }else{
+            this.record = false
+            this.counter = 'Total: 0'
+            this.alert=''
+            this.norecord=response.data.msg
+            this.classname=''
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            }
+        
+        }).catch(()=>{
+            this.record = false
+            this.norecord=''
+            this.counter = 'Total: 0'
+            this.classname='alert alert-danger p-1 text-center'
+            this.alert='Check network connection or reload this page'
+            this.$Progress.fail()
+            this.isDisabled = true
+            this.opacity = this.opacity_disable
         })
     },
         listcounter: function(){
@@ -382,76 +467,12 @@ export default {
         this.alertmodal="";
         this.classnamemodal="";
         },
-    filter: function(){
-        axios.get('/api/widgetfilter/', {
-            params:{
-                'status_id': this.filterlist
-            }
-        }, this.loader=true, this.loaderstatus='block')
-        .then(response => {
-            if(response.data.status == response.data.confirmed){
-            this.alert=''
-            this.classname=''
-            this.info = response.data.result
-            this.counter = 'Total: '+ this.info.length
-            this.record = true
-            this.norecord=''
-            this.loader=false
-            this.loaderstatus='none'
-            }else{
-            this.record = false
-            this.counter = 'Total: 0'
-            this.norecord=response.data.msg
-            this.classname=''
-            this.loader=false
-            this.loaderstatus='none'
-            }
-
-        }).catch(()=>{
-            this.loader=false
-            this.norecord=''
-            this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
-            this.alert='Check network connection or reload this page'
-        })
-    },
-
-    searchby: function(){
-                axios.get('/api/widgetsearch/', {
-            params:{
-                'search': this.search
-            }
-        }, this.loader=true, this.loaderstatus='block')
-        .then(response => {
-            if(response.data.status == response.data.confirmed){
-            this.alert=''
-            this.classname=''
-            this.info = response.data.result
-            this.counter = 'Total: '+ this.info.length
-            this.record = true
-            this.norecord=''
-            this.loader=false
-            this.loaderstatus='none'
-            }else{
-            this.record = false
-            this.counter = 'Total: 0'
-            this.norecord=response.data.msg
-            this.classname=''
-            this.loader=false
-            this.loaderstatus='none'
-            }
-
-        }).catch(()=>{
-            this.loader=false
-            this.norecord=''
-            this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
-            this.alert='Check network connection or reload this page'
-        })
-    },
-
+  
+  
         downloadfile: function(){
-        this.downloadmsg='Please wait'
+        this.$Progress.start()
+        this.isDisabled = true
+        this.downloadmsg='Please wait...'
         axios.get('/api/download_widget/', {
             params:{
                 "filetype":"excel"
@@ -462,24 +483,27 @@ export default {
             this.alert=''
             this.classname=''
             this.record = true
-            this.loader=false
             this.norecord=''
             this.downloadmsg = response.data.msg
             this.baseDataname=response.data.baseDataname
             this.baseData=response.data.baseData
             this.isdownload=true
+            this.$Progress.finish()
+            this.isDisabled = false
             }else{
-            this.loader=false
             this.norecord=''
             this.downloadmsg=response.data.msg
             this.classname=''
+            this.$Progress.finish()
+            this.isDisabled = false
             }
 
         }).catch(()=>{
-            this.loader=false
             this.norecord=''
             this.classname=''
             this.downloadmsg='Check network connection or reload this page'
+            this.$Progress.finish()
+            this.isDisabled = false
         })
     },
 
@@ -508,19 +532,6 @@ export default {
         });
         this.list_id = []
         },
-
-        start:function(){
-        this.$Progress.start()
-        this.isDisabled = true
-        },
-         fail:function(){
-        this.$Progress.fail()
-        this.isDisabled = false
-        },
-        finish:function(){
-        this.$Progress.finish()
-        this.isDisabled = false
-        }
 
 
     },

@@ -1,15 +1,21 @@
-<template>
-<div>
-    <AdminHeader/>
-    <div class="col-md-10 col-md-offset-2 col-12 maindiv">
-<section v-if="loader==false">
-<div class="col m-2 mt-0 mb-1"><div v-bind:class="classname">{{alert}}</div></div>
 
+<template>
+<div :style="opacity">
+<AdminHeader>
+<section v-if="record==true">
+    <div class="container">
+        <div class="row">
+            <div class="col m-2 mt-0 mb-1">
+            <div v-bind:class="classname">{{alert}}</div>
+            </div>
+        </div>
+    </div>
 <div class="container">
 <div class="row">
 <div class="col-md-4">
 <div class="p-1 pb-0 ml-0 pl-0">
-<h5 class="mt-2 text-danger"><i class="bi-trash" style="font-size: 1.5rem;"></i> Trash </h5>
+
+    <h5 class="mt-2 text-danger"> Trash </h5>
 </div>
 </div>
 <div class="col-md-8 p-0 d-flex justify-content-end">
@@ -20,22 +26,23 @@
 </div>
 </div>
 </div>
+
 <div class="container">
 <div class="border">
 <div class="row">
 <div class="col-md-12">
     <div class="p-2">
-         <p class="lead text-danger text-center">Are you sure of what you are doing! Please confirm before you take this unrecoverable action.</p>
-            <form @submit.prevent="formCheck" class="needs-validation">
+ <p class="text-danger p-3 pb-0 pt-0">Are you sure of what you are doing! Please confirm before you take this unrecoverable action.</p>
+<form @submit.prevent="formCheck" class="needs-validation">
             <fieldset class="border p-2 pt-0">
-                <legend class="w-auto text-danger" style="float: none; padding: inherit;">Record</legend>
+                <legend class="w-auto" style="float: none; padding: inherit;">Record</legend>
             <div class="row">
             <div class="col-md-5">
                 <div class="m-1">
                         <input type="hidden" class="d-none" v-model="token" required readonly>
                         <input type="hidden" class="d-none" v-model="keyid" required readonly>
                 <div class="input-group">
-                    <button type="button" class="btn btn-outline-info">Widget</button>
+                    <span class="input-group-text">Widget</span>
                     <input type="text" name="title" v-model="widget" class="form-control" disabled readonly>
                 </div>
                 <small class="form-text text-muted"></small>
@@ -46,7 +53,7 @@
          <div class="col-md-5">
                 <div class="m-1">
                 <div class="input-group">
-                    <button type="button" class="btn btn-outline-info">Title</button>
+                    <span class="input-group-text">Title</span>
                     <input type="text" name="title" v-model="title" class="form-control" required readonly placeholder="Name this widget for quick reference">
                 </div>
                 <small class="form-text text-muted"></small>
@@ -69,37 +76,35 @@
             </form>
         
     </div>
+
 </div>
 </div>
 </div>
 </div>
-    
 </section>
 <section v-else>
-   <div class="container-fluid">
-       <div class="row mt-5 ">
-           <div class="col-12 mt-5 d-flex justify-content-center">
-<div class="lds-roller" :style="'display:'+loaderstatus"><div></div><div></div><div></div></div>
-           </div>
-           <div class="col-12 mt-5 d-flex justify-content-center">
-   <p class="text-danger mt-2">{{norecord}}</p> <br clear="all/">
-           </div>
- <div class="col-12 mt-5 d-flex justify-content-center">
-<p class="m-2" @click="$router.go(-1)" :style="'display:'+backbtn"><a href="#" class="btn btn-outline-primary text-center">  <i class="bi-arrow-left"></i> Back </a></p>
-           </div>
-       </div>
-   </div>
-</section>
+<div class="container">
+    <div class="row">
+    <div class="col-12 mt-5 d-flex justify-content-center">
+    <p class="lead text-danger mt-2">{{norecord}}</p> <br clear="all/">
+    </div>
+    <div class="col-12 mt-3 d-flex justify-content-center">
+    <p class="m-2" @click="$router.go(-1)" :style="'display:'+backbtn"><a href="#" class="btn btn-outline-primary text-center">  <i class="bi-arrow-left"></i> Back </a></p>
+    </div>
+    </div>
 </div>
+</section>
+</AdminHeader>
 
 </div>
 </template>
+
 <script>
 import axios from 'axios'
 export default {
     data (){
         return{
-        info:[],
+         info:[],
         auth_check: false,
         alert: null,
         checked: true,
@@ -116,13 +121,15 @@ export default {
         err_title: null,
         selectDefault:"Select",
         classname: null,
-        submit:'Delete',
-        submittxt:'Delete',
+        submit:'Submit',
+        submittxt:'Submit',
         isDisabled: false,
         error_btn: null,
+        record:null,
         norecord:null,
-        loaderstatus:'',
-        backbtn:'none',
+        opacity_enable:'opacity:0.5; pointer-events:None;',
+        opacity_disable:'opacity:1; pointer-events:All;',
+        opacity:'',
     }
     },
 
@@ -132,22 +139,22 @@ export default {
     }, 
 
     methods:{
-    formCheck: function(e){
-    this.delete()
+          formCheck: function(e){
+        this.delete()
     e.preventDefault();
     },
 
        preview: function(){
+        this.$Progress.start()
+        this.isDisabled = true
+        this.opacity = this.opacity_enable
         axios.get('/api/validate_id/', {
             params:{
                 'keyid': this.keyid_validate
             },
-        }, this.loader=true, this.loaderstatus='block')
+        })
         .then(response => {
             if(response.data.status == response.data.confirmed){
-            this.loader=false
-            this.loaderstatus='none'
-            this.backbtn='none'
             this.alert=''
             this.classname=''
             this.norecord=''
@@ -155,78 +162,97 @@ export default {
             this.widget = this.info['widgetName']
             this.title = this.info['widgetTitle']
             this.keyid = this.info['keyid']
-            this.record = false
-            }else{
-            this.loader=true
-            this.loaderstatus='none'
-            this.backbtn='block'
             this.record = true
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable 
+            }else{
+            this.record = false
             this.classname=''
             this.alert=''
             this.norecord=response.data.msg
             this.classname=response.data.classname
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
             }
         }).catch(()=>{
-            this.loader=true
-            this.loaderstatus='none'
-            this.backbtn='block'
-            this.record = true
+            this.record = false
             this.classname=''
             this.alert=''
             this.norecord='Check network connection or reload this page'
+            this.$Progress.fail()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
         })
     },
 
     delete: function(){
-    const form = new FormData();
+        this.$Progress.start()
+        this.isDisabled = true
+        this.opacity = this.opacity_enable
+        const form = new FormData();
         form.append('widget', this.widget)
         form.append('title', this.title)
         form.append('keyid', this.keyid)
         form.append('csrfmiddlewaretoken', this.token)
         axios.post('/posts/delete_widget/', form,{
-        },
-         this.loader=true, this.loaderstatus='block' 
-        ).then(response => {
+        }).then(response => {
         if(response.data.status==response.data.confirmed){
         this.classname=response.data.classname
         this.alert=response.data.msg
         this.submit=this.submittxt
-        this.loader=false
-        this.loaderstatus='none'
+        this.$Progress.finish()
+        this.isDisabled = false
+        this.opacity = this.opacity_disable
+        setInterval(function(){
+        window.history.back()
+        },3000)
         }else{
         this.classname=response.data.classname
         this.alert=response.data.msg
         this.submit=this.submittxt
-         this.loader=false
-         this.loaderstatus='none'
+        this.$Progress.finish()
+        this.isDisabled = false
+        this.opacity = this.opacity_disable
         }
     }).catch(()=>{
-        this.loader=false
-        this.loaderstatus='none'
         this.classname='alert alert-danger p-1 text-center'
         this.alert='Check network connection or reload this page'
         this.submit=this.submittxt
+        this.$Progress.fail()
+        this.isDisabled = false
+        this.opacity = this.opacity_disable
     })  
     },
 
     tokenize: function(){
-    const form = new FormData();
-    form.append('token', Math.random(9,99999))
-    axios.get('/auth/tokenize/',form, {
-    }).then(response => {
-        if(response.data.status==response.data.confirmed){
-        this.token=response.data.key
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
-        }else{
-        this.alert='Check network connection or reload this page'
-        }
-        
-    }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
-       this.alert='Check network connection or reload this page'
-
-    })
-    },
+        this.$Progress.start()
+      this.isDisabled = true
+    axios.get('/auth/tokenize/',{
+    params:{
+      'token': Math.random(9, 9999)
+    }
+  }).then(response => {
+      if(response.data.status==response.data.confirmed){
+      this.token=response.data.key
+      axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
+      this.$Progress.finish()
+      this.isDisabled = false
+      }else{
+      this.$Progress.finish()
+      this.isDisabled = false
+      this.classname='alert alert-danger p-1 text-center'
+      this.alert='Check network connection or reload this page'
+      }
+    
+  }).catch(()=>{
+        this.$Progress.fail()
+      this.isDisabled = false
+      this.classname='alert alert-danger p-1 text-center'
+      this.alert='Check network connection or reload this page'
+  })
+  },
 
     },
 

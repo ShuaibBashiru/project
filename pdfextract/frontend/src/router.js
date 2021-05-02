@@ -35,18 +35,14 @@ routes:[
     meta:{layout:'GeneralHeader', title:'Contact us'},
     component: ()=> import('./views/Contactus.vue')
 },
-{
-    path: '/oath/statement',
-    name:'Statement',
-    meta:{layout:'SidebarNoOath', title:'statement'},
-    component: ()=> import('./views/About.vue')
-},
+
 {
     path: '/oath/signin',
     name:'Signin',
     meta:{layout:'GeneralHeader', title: 'Sign In'},
     component: ()=> import('./secure/Signin.vue')
 },
+
 {
     path: '/oath/dashboard',
     name: 'dashboard',
@@ -67,23 +63,17 @@ routes:[
     component: ()=> import('./secure/Export.vue')
 },
 
-{
-    path: '/oath/function_one',
-    name: 'function_one',
-    meta: {layout:'SidebarNoOath', title: 'function_one'},
-    component: ()=> import('./secure/Function_one.vue')
-},
 
 {
-    path: '/oath/traindata',
-    name: 'Traindata',
-    meta: {layout:'SidebarNoOath', title: 'Train data'},
-    component: ()=> import('./secure/Traindata.vue')
+    path: '/oath/fileupload',
+    name: 'fileUpload',
+    meta: {layout:'SidebarNoOath', title: 'Transcript note'},
+    component: ()=> import('./secure/Fileupload.vue')
 },
 
 {
     path: '/oath/note',
-    name: 'transcript',
+    name: 'note',
     meta: {layout:'SidebarNoOath', title: 'Transcript note'},
     component: ()=> import('./secure/Note.vue')
 },
@@ -97,18 +87,12 @@ routes:[
 },
 
 {
-    path: '/oath/prediction',
-    name: 'Predictions',
-    meta: {layout:'SidebarNoOath', title: 'predictions'},
-    component: ()=> import('./secure/Prediction.vue')
+    path: '/oath/extract',
+    name: 'extract',
+    meta: {layout:'SidebarNoOath', title: 'extract note'},
+    component: ()=> import('./secure/Extract.vue')
 },
 
-{
-    path: '/oath/template',
-    name: 'template',
-    meta: {layout:'SidebarNoOath', title: 'Template'},
-    component: ()=> import('./views/template.vue')
-},
 
 ]
 

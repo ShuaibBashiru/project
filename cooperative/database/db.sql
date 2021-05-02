@@ -162,14 +162,14 @@ ALTER TABLE `site_menus` ADD `record_status` INT NOT NULL AFTER `status_id`_by`
 INSERT INTO `user_menus` (`id`, `menuName`, `category`, `menu_icon`,
 `menu_description`, `uniqueCode`, `status_id`, `record_status`, `created_by`,
 `modified_by`, `date_created`, `time_created`, `date_modified`, `time_modified`)
-VALUES (NULL, 'dashboard', 'dashboard', 'bi-bricks', 'Home', '4432421534124', '1',
+VALUES (NULL, 'updatewidget', 'updatewidget', 'bi-bricks', 'Home', '44324215354124', '1',
 '1', '1', '1', '2021-04-13', '10:56:05', '2021-04-13', '10:56:05');
 
 INSERT INTO `user_priviledges` (`id`, `menu_id`, `user_id`,
  `menu_description`, `uniqueCode`, `status_id`,
 `record_status`, `created_by`, `modified_by`, `date_created`,
   `time_created`, `date_modified`, `time_modified`)
-  VALUES (NULL, '3', '1', NULL, '4432421341215', '1', '1', '1', '1', '2021-04-07',
+  VALUES (NULL, '5', '1', NULL, '4432421341115', '1', '1', '1', '1', '2021-04-07',
   '11:34:10', '2021-04-07', '11:34:10');
 
 

@@ -24,9 +24,8 @@
        </div>
       <ul class="list-group mt-4 list-group-flush">
     <li class="list-group-item active"><router-link to="/oath/dashboard" class="text-white">Menu</router-link></li>
-  <!-- <li class="list-group-item"><router-link class="" to="/oath/export">Upload Dataset</router-link></li> -->
-  <li class="list-group-item"><router-link class="" to="/oath/note">New Files</router-link></li>
-  <li class="list-group-item"><router-link class="" to="/oath/summary">Extracted files</router-link></li>
+  <li class="list-group-item"><router-link class="" to="/oath/fileupload">New Files</router-link></li>
+  <li class="list-group-item"><router-link class="" to="/oath/contents">Saved File</router-link></li>
 </ul>
        <!-- layer one -->
     </div>

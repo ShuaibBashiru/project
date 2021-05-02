@@ -75,9 +75,10 @@ WSGI_APPLICATION = 'pdfextract.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'text_summary_db',
+        'NAME': 'pdf_extract',
         'USER': 'root',
         'PASSWORD': '12345678',
         'HOST': '127.0.0.1',

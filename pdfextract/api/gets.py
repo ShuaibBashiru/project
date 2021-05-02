@@ -11,6 +11,30 @@ import matplotlib as plt
 from django.db import connection
 
 
+def file_uploads(request):
+    with connection.cursor() as cursor:
+        counter = cursor.execute("SELECT * FROM file_uploads_tbl "
+                                    "ORDER BY last_modified DESC")
+        row = cursor.fetchall()
+        if counter > 0:
+            feedback = {
+                'res': True,
+                'status': 'success',
+                'msg': '',
+                'result': row,
+                'classname': '',
+            }
+        else:
+            feedback = {
+                'status': 'Failed',
+                'msg': 'No data uploaded yet',
+                'result': '',
+                'classname': 'alert alert-danger p-1 text-center',
+                 }
+        return JsonResponse(feedback, safe=False)
+
+
+
 def get_dataset(request):
     with connection.cursor() as cursor:
         counter = cursor.execute("SELECT * FROM crop_list "
@@ -32,7 +56,6 @@ def get_dataset(request):
                 'classname': 'alert alert-danger p-1 text-center',
                  }
         return JsonResponse(feedback, safe=False)
-        cursor.close()
 
 
 def listsummary(request):
@@ -67,4 +90,3 @@ def listsummary(request):
         print(e)
 
     return JsonResponse(feedback, safe=False)
-    cursor.close()

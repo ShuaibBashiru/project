@@ -63,7 +63,7 @@ created(){
                 this.message = response.data.msg
                 this.error_found = true
                  setTimeout(function(){
-                window.location.href='/site/auth-check'
+                window.location.href='/site/logout'
                 },3000)
             }
         }).catch(()=>{
@@ -71,7 +71,7 @@ created(){
             this.message = 'Check network connection or reload this page'
             this.error_found = true
                setTimeout(function(){
-                window.location.href='/site/auth-check'
+                window.location.href='/site/logout'
                 },3000)
             
 

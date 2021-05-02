@@ -1,11 +1,14 @@
 from django.urls import path
-from . import views, testfile, upload, gets, traindata, inserts
+from . import views, testfile, upload, gets, traindata, inserts, extracts
 
 
 urlpatterns = [
     path('', views.index, name="home"),
     path('test/', testfile.testing, name="home"),
     path('upload/', upload.upload, name="uploader"),
+    path('file_uploads/', gets.file_uploads, name="file_uploads"),
+    path('file_extract/', extracts.file_extract, name="file_extract"),
+
     path('summarize/', inserts.summarize, name="summarize"),
     path('savesummary/', inserts.savesummary, name="savesummary"),
     path('listsummary/', gets.listsummary, name="listsummary"),

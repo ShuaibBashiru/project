@@ -47,13 +47,15 @@ created(){
    this.logout(); 
 },
     methods:{
-            logout: function(){
-    axios.get('/auth/logout/')
+    logout: function(){
+             this.$Progress.start()
+          axios.get('/auth/logout/')
         .then(response => {
             if(response.data.status==response.data.confirmed){
                 this.message = response.data.msg
                 this.error_found = false
                 localStorage.removeItem('userdata');
+                this.$Progress.finish()
                 setTimeout(function(){
                 window.location.href=response.data.redirect
                 },2000)
@@ -61,6 +63,7 @@ created(){
                 this.message = response.data.msg
                 this.error_found = false
                 localStorage.removeItem('userdata');
+                this.$Progress.finish()
                  setTimeout(function(){
                 window.location.href='/site/signin'
                 },2000)
@@ -68,7 +71,8 @@ created(){
         }).catch(()=>{
             this.message = 'Check network connection or reload this page'
             this.error_found = true
-            sessionStorage.removeItem("userdata");  
+            localStorage.removeItem("userdata");
+            this.$Progress.finish()
 
         })
     },

@@ -22,10 +22,6 @@
 </ul>
 
 <ul class="navbar-nav m-0 p-0 ms-auto">
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" href="#">Follow us on</a> </li>
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" target="_blank" v-bind:href="media.facebook"><i class="bi-facebook"></i></a> </li>
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" target="_blank" v-bind:href="media.twitter"><i class="bi-twitter"></i></a> </li>
-    <li class="nav-item"> <a v-bind:class="'nav-link ' + appinfo.f_color" target="_blank" v-bind:href="media.instagram"><i class="bi-instagram"></i></a> </li>
     <li class="nav-item"> <router-link v-bind:class="'nav-link ' + appinfo.f_color" to="/site/contact">Help(Chat)</router-link> </li>
 </ul>
 </div>
@@ -40,8 +36,10 @@
 </div>
 </template>
 <script>
+
 import appsettings from '../json/myapp.json'
 export default {
+
 data(){
 return {
 "media":appsettings.media,

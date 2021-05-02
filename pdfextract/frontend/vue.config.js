@@ -6,7 +6,14 @@ module.exports = {
         pathRewrite: { "^/api/": "/api/" },
         changeOrigin: true,
         logLevel: "debug"
+      },
+      "^/pdfjs": {
+        target: "https://cdn.mozilla.net",
+        pathRewrite: { "^/pdfjs/": "/pdfjs/" },
+        changeOrigin: true,
+        logLevel: "debug"
       }
     }
   }
+  
 };
