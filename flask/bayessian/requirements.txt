@@ -1,0 +1,6 @@
+textblob
+xlrd
+matplotlib
+numpy
+werkzeug
+pandas

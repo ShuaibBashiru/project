@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="sidebarright" id="sidebarright">
+	<br>
+	<div class="slidecontent">
+	<div class="modulesummary">
+		<div class="menusumm">
+		<img src="{{ url_for('static', filename='icons/') }}">
+	</div>
+	<div class="menusumm">
+
+	<h2>-----------------------------</h2>
+	</div>
+
+	<div class="menusumm">
+		<h2>Quick Links</h2>
+		<ul class="links">
+			<li class="selectcsv"><i class="fa fa-user"></i><a href="{{url_for('uploadimages')}}">Upload images</a></li>
+			<li class="selectcsv"><i class="fa fa-user"></i><a href="{{url_for('performance')}}">Resukts</a></li>
+		</ul>
+	</div>
+
+	</div>
+	</div>
+	<p id="response"></p>
+	<div class="modalwrapper">
+			<div class="menuone menuonemain">
+	<ul class="mainmenulist">
+		<li><a href="#">Statistics</a></li>
+		<li><a href="http://127.0.0.1:5000/home"><i class="fa fa-refresh"></i></a></li>
+		<li><span class="adiv"><a href="#"><i class="fa fa-save"></i> ................. </a></span></li>
+	</ul>
+		</div>
+	<br clear="all">
+  <div class="chartdivdash">
+<p></p>
+</div>
+
+	</div>
+	</div><!-- end of wrapinnercon -->
+
+	</div><!-- end of wrapperforcontent -->
+	<br>
+	</div>
+	</body>
+	</html>
+	{% endblock %}

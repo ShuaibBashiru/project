@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="sidebarright" id="sidebarright">
+	<br>
+	<div class="slidecontent">
+        <div class="formdiv">
+                <p>Create Category name</p>
+                <p class="successclass" id="message"></p>
+                <form id="formlevel">
+              <input type="hidden" name="id">
+
+              <table class="forminput">
+                    <tr>
+                        <td><input type="text" required name="cname" placeholder="Class name"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                <button type="submit" class="triggerBtn savelevel">Save and Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+                <p class="successclass" id="response"></p>
+                <input type="hidden" class="tdname">
+            <table class="itemlist" id="recordlist">
+                <tr>
+                    <th>LevelID</th>
+                    <th>Level name</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                    </tr>
+        </table>
+            </div>
+	</div><!-- end of wrapperforcontent -->
+	</div>
+	</body>
+	</html>
+	{% endblock %}

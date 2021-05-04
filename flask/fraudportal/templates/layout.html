@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrator</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='font/css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/animate.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/slick.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/dashboard.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/formdesign.css')}}">
+	<script type="text/javascript" src="{{ url_for('static', filename='libraries/jquery-1.12.1.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='libraries/ui.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+</head>
+<body onload="">
+<div class="mainContainer">
+	<div class="wrapheader">
+	<div class="menuone">
+	</div>
+	<div class="menuone">
+	<!--<img src="{{ url_for('static', filename='icons/logo.png') }}">-->
+		<div class="logodiv"> <span>Fraud detection System in Healthcare</span></div>
+		<div class="searchwrapper">
+<div class="cartwrapper">
+<ul class="inline-menu">
+					<li class="dropdown"><i class="fa fa-user-o"></i>
+					<span id="admin"></span> <i class="fa fa-angle-double-right"></i>
+					</li>
+		<li class="dropdown dropdown-small">
+						<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">My Account </span> <i class="fa fa-angle-down"></i></a>
+					</li>
+		<li class="dropdown dropdown-small" onclick=""><a href="http://127.0.0.1:5000/"><span class="value">Sign out</span></a></li>
+				</ul>
+
+</div>
+</div>
+
+	</div>
+	<div class="menuone menuonemain">
+<ul class="mainmenulist">
+	<li><a href="127.0.0.1:5000/authentication">Administrator panel</a></li>
+	<li><span class="adiv"></span></li>
+</ul>
+
+	</div>
+	</div>		
+<!-- wrap header end -->
+<div class="wrapinnercon">
+	<div class="wrapperforcontent">
+				<div class="sidebarleft">
+<div class="categorydiv">
+<ul class="categorydivlist">
+				<li><i class="fa fa-book"></i><strong><a href="#">Administrator</a></strong></li>
+				<ul class="underlist links">
+				<li><i class="fa fa-angle-double-right"></i><a href="#">View transactions</a></li>
+				<li><i class="fa fa-angle-double-right"></i><a href="#">Run prediction</a></li>
+				<li><i class="fa fa-angle-double-right"></i><a href="#">View report(s)</a></li>
+				
+				</ul>
+				<li><i class="fa fa-wpforms"></i><strong><a href="#">Staffs</a></strong></li>
+				<ul class="underlist links">
+					<li><i class="fa fa-angle-double-right"></i><a href="#">Create account</a></li>
+					<li><i class="fa fa-angle-double-right"></i><a href="#">Patient record</a></li>
+				<li><i class="fa fa-angle-double-right"></i><a href="#">View report(s)</a></li>
+
+				</ul>
+				<li><i class="fa fa-bar-chart"></i><a href="#">Statistics</a></li>
+				<li><i class="fa fa-cog"></i><a href="#">Settings</a></li>
+			</ul>
+			</div>
+
+
+		</div>
+{% block content %}{% endblock %}
