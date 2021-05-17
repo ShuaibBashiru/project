@@ -1,0 +1,13 @@
+{
+"media":{
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://www.twitter.com/",
+    "instagram": "https://www.instagram.com/",
+    "youtube": "https://www.youtube.com/"
+},
+"appinfo":{
+    "appname": "Biometric",
+    "logo": "http://localhost:8080/logo/logo.png"
+}
+
+}

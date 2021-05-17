@@ -1,0 +1,16 @@
+CREATE TABLE `corona_list` (
+`id` INT NOT NULL AUTO_INCREMENT ,
+`username` varchar(50) NOT NULL ,
+`test_date` varchar(50) NOT NULL ,
+ `cough` INT NOT NULL ,
+ `fever` INT NOT NULL ,
+ `sore_throat` INT NOT NULL ,
+ `shortness_of_breath` INT NOT NULL ,
+ `head_ache` INT NOT NULL ,
+ `corona_result`VARCHAR(50) NOT NULL ,
+ `age_60_and_above` VARCHAR(50) NOT NULL ,
+ `gender` VARCHAR(50) NOT NULL ,
+ `test_indication` VARCHAR(50) NOT NULL ,
+    `date_created` DATETIME(6) NOT NULL ,
+`last_modified` DATETIME(6) NOT NULL ,
+PRIMARY KEY (`id`)) ENGINE = InnoDB;

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Software</title>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi, initial-scale=0, maximum-scale=0.7, user-scalable=yes" />
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='font/css/font-awesome.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/animate.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/hint.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/slick.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/frontStyle.css')}}">
+  <!-- <script>window.$=window.jQuery=require('jquery');</script> -->
+  <script type="text/javascript" src="{{url_for('static', filename='libraries/jquery-1.12.1.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='libraries/ui.js')}}"></script>
+  <!-- <script type="text/javascript" src="{{url_for('static', filename='libraries/loader.js')}}"></script> -->
+  <script type="text/javascript" src="{{url_for('static', filename='libraries/slick.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='scripts/slide.js')}}"></script>
+  <!-- <script type="text/javascript" src="{{url_for('static', filename='scripts/scripts.js')}}"></script> -->
+
+</head>
+<body>
+<div class="mainContainer">
+	<div class="wrapheader">
+
+	<br clear="all"/>
+	</div>
+<!-- wrap header end -->
+<div class="wrapinnercon">
+	<div class="wrapperforcontent">
+		<div class="sidebarright">
+      <br clear="all">
+      <br clear="all">
+<div class="slidecontent">
+<div class="module">
+<div class="slidecontainer">
+<div class="nextdiv"><i class="fa fa-angle-right fa-2x"></i></div>
+<div class="prevdiv"><i class="fa fa-angle-left fa-2x"></i></div>
+<p class="apptitle">Sentiment Analysis System</p>
+<div class="slideshow">
+<!-- start of a div -->
+<div class="slide">
+<div class="imgdiv">
+	<img src="{{url_for('static', filename='slide/slide1.jpg')}}" alt="">
+</div>	
+</div>
+<!-- end of a div -->
+<!-- start of a div -->
+<div class="slide">
+    <div class="imgdiv">
+      <img src="{{url_for('static', filename='slide/slide2.jpg')}}" alt="">
+    </div>	
+    </div>
+    <!-- end of a div -->
+
+    <!-- start of a div -->
+<div class="slide">
+    <div class="imgdiv">
+      <img src="{{url_for('static', filename='slide/slide3.png')}}" alt="">
+    </div>	
+    </div>
+    <!-- end of a div -->
+
+</div>
+<!-- <p class="apptitle">Sentiment Analysis System</p> -->
+
+
+</div>
+<div class="logwrap">
+<div class="logsum">
+	<p>Admin Signin</p>
+	<hr/>
+	<div class="wrap1">
+	<!-- <button class="btn2">Student Login</button> -->
+	</div>
+	<div class="wrap2">
+<form action="/authentication" method="POST">
+  <p>{{errormessage}}</p>
+  <input type="password" name="adminid" class="adminid" id="" placeholder="ADMIN ID">
+  </div>
+
+	<div class="wrap3">
+	<button class="btn2">Sign In</button>
+</div>
+</form>
+
+</div>
+
+
+</div>
+
+</div>
+</div>
+<!-- end of slide content -->
+
+
+	</div><!-- end../ of right content -->
+</div><!-- end of wrapinnercon -->
+
+</div><!-- end of wrapperforcontent -->
+<br>
+</body>
+</html>

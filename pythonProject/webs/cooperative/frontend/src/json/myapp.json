@@ -1,0 +1,34 @@
+{
+"media":{
+    "facebook": "https://www.facebook.com/yabatechpresige",
+    "twitter": "https://www.twitter.com/yabatechpresige",
+    "instagram": "https://www.instagram.com/yabatechpresige",
+    "youtube": "https://www.youtube.com/yabatechpresige",
+    "email": "info@yabatechprestige.org",
+    "phone": "+2348033110087, +2348023239531",
+    "address": "Yaba College of Technology, Yaba, Lagos, Nigeria"
+},
+"appinfo":{
+    "appname": "Yabatech Prestige",
+    "year": "2021",
+    "displaynamecap": "YABATECH PRESTIGE",
+    "displaynamelower": "Yabatech Prestige",
+    "sloganslide": "Doing Business With Human Face",
+    "bg_color": "bg-light",
+    "css":{
+        "headerbg": "background: #ffffff; box-shadow:1px 0px 0px 1px #ccc;",
+        "dash_headerbg": "background: #3d8160; box-shadow:1px 0px 0px 1px #ccc;",
+        "dash_bodycolor": "color: #ffffff;",
+        "headercolor": "",
+        "sidebarbg": "background: #2a6e4d;",
+        "bodycolor": "color: black;"
+    },
+    "logo": "logo.png",
+    "logoHeight": 32,
+    "logoWidth": 32
+},
+"error":{
+    "networkerror":"Check network connection or reload this page"
+}
+
+}

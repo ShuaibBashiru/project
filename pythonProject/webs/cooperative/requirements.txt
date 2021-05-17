@@ -1,0 +1,8 @@
+serial
+pandas
+django
+yagmail
+keyring
+build-essential
+mysql-client
+django_session_timeout

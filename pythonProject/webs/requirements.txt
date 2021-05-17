@@ -1,0 +1,11 @@
+serial
+pandas
+django
+kivymd
+mysqlclient
+django_session_timeout
+yagmail
+keyring
+pixellib
+opencv-python
+joblib

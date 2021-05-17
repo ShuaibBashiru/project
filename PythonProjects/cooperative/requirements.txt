@@ -1,0 +1,6 @@
+serial
+pandas
+django
+build-essential
+mysql-client
+django_session_timeout

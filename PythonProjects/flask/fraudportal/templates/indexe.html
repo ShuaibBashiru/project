@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="sidebarright" id="sidebarright">
+	<br>
+	<div class="slidecontent">
+	<div class="modulesummary">
+				<!-- <p class="welcomepara">Welcome to Administrator portal <br clear="all"> -->
+			<!-- <small>We have assembled some quick links to get you started:</small></p> -->
+		<div class="menusumm">
+		<img src="{{ url_for('static', filename='icons/animated.gif') }}"> 
+	</div>	
+	<div class="menusumm">
+	<h2>Test a dataset</h2>
+		<ul class="links">
+			<li class="selectcsv"><i class="fa fa-bars"></i><a href="#">Click here to train a dataset</a></li>
+			<li><form action="/outliers" method="post" class="form">
+				<p>A file is ready for testing, click the button below</p>
+				<button type="submit">Run test</button>
+			</form></li>
+			<!-- <li><i class="fa fa-money"></i><a href="#">C</a></li> -->
+		</ul>
+	</div>
+	<div class="menusumm">
+			<img src="{{ url_for('static', filename='icons/animate2.gif') }}"> 
+		</div>	
+	
+	</div>
+	</div>
+	<p id="response"></p>
+	<div class="modalwrapper">
+			<div class="menuone menuonemain">
+	<ul class="mainmenulist">
+		<li><a href="#">Statistics</a></li>
+		<li><a href="http://127.0.0.1:5000/home"><i class="fa fa-refresh"></i></a></li>
+		<li><span class="adiv">Filter fraud By ID</span></li>
+		<li><form action="/fetchbyid" method='post'>
+		<select name="ids">
+				{% for ids in id %}
+				<option value="{{ids}}">{{ids}}</option>
+				{% endfor %}
+		</select>
+		<button type="submit">Find outliers here</button>
+		</form>
+		</li>
+		<li><span class="adiv"><a href="#"><i class="fa fa-save"></i> Save Result Obtained </a></span></li>
+	</ul>
+	
+		</div>
+	<p>{{filename}}</p>
+	<div class="modalinner">
+		<p>Suspicious transactions found, filter by ID to view outliers</p>
+				{{tables2|safe}}
+				<br clear="all">
+		<p>All transactions are listed below</p>
+                {{tables|safe}}
+	<div class="statdiv">
+		<!-- <p class="statdesc">Statistics</p> -->
+	<div class="chartdiv" id="chart_div">
+			<!-- <img src="{{ url_for('static', filename='plots/feedback.png') }}">  -->
+	</div>
+	
+	</div>
+	<!-- <div class="statdiv2">
+	<div class="chartdiv" id="chart_div2">
+		
+	</div>
+	
+	</div> -->
+	</div>
+	</div>
+	<!--  -->
+	
+	<div id="modula"></div>
+	</div><!-- end../ of right content -->
+	</div><!-- end of wrapinnercon -->
+	
+	</div><!-- end of wrapperforcontent -->
+	<br>
+	</div>
+	</body>
+	</html>
+	{% endblock %}

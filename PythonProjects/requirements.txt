@@ -1,0 +1,5 @@
+serial
+pandas
+django
+mysql-client
+django_session_timeout

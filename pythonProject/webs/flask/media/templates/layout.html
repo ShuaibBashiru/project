@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Administrator</title>
+<link rel="stylesheet" href="{{url_for('static', filename='font/css/font-awesome.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/animate.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/slick.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/dashboard.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/formdesign.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/tableStyling.css')}}">
+<script type="text/javascript" src="{{ url_for('static', filename='libraries/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='libraries/ui.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='server/event.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='server/serverins.js') }}"></script>
+
+</head>
+<body>
+<div class="loaderbox">
+<i class="fa fa-spinner fa-pulse fa-5x"></i>
+<p>Please wait....</p>
+</div>
+<div class="mainContainer">
+<div class="wrapheader">
+<div class="menuone">
+</div>
+<div class="menuone">
+<div class="logodiv"><img src="{{ url_for('static', filename='icons/logo.png') }}"> <span>Social Media Identification Model</span></div>
+<div class="searchwrapper">
+<div class="cartwrapper">
+<ul class="inline-menu">
+<li class="dropdown"><i class="fa fa-user-o"></i>
+<span id="admin"></span> <i class="fa fa-angle-double-right"></i>
+</li>
+<li class="dropdown dropdown-small">
+<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">My Account </span> <i class="fa fa-angle-down"></i></a>
+</li>
+<li class="dropdown dropdown-small" onclick=""><a href="/"><span class="value">Sign out</span></a></li>
+</ul>
+
+</div>
+</div>
+
+</div>
+<div class="menuone menuonemain">
+<ul class="mainmenulist">
+<li><a href="#">Administrator panel</a></li>
+<li><span class="adiv">..................</span></li>
+</ul>
+
+</div>
+</div>
+<!-- wrap header end -->
+<div class="wrapinnercon">
+<div class="wrapperforcontent">
+<div class="sidebarleft">
+<div class="categorydiv">
+<ul class="categorydivlist">
+<li><i class=""></i></li>
+<li class="headlist list"><i class="fa fa-dashboard"></i><a href="{{url_for('dashboard')}}">Dashbaord</a></li>
+<li><i class="fa fa-book"></i><a href="{{url_for('createclass')}}">Create category</a></li>
+<li><i class="fa fa-wpforms"></i><a href="{{url_for('uploadimages')}}">Upload images</a></li>
+<li><i class="fa fa-link"></i><a href="{{url_for('performance')}}">Model</a></li>
+<li><i class="fa fa-bar-chart"></i><a href="#{{url_for('statistics')}}">Statistics</a></li>
+<li><i class="fa fa-lock"></i><a href="/">Log me out (Admin)</a></li>
+</ul>
+</div>
+
+
+</div>
+{% block content %}{% endblock %}

@@ -1,0 +1,249 @@
+<template>
+<div :style="opacity">
+<section v-if="accountActive==true">
+<div class="container-fluid header">
+<div class="row p-1">
+<div class="col-md p-0">
+</div>
+</div>
+</div>
+<br clear="all"/>
+<div class="container">
+
+<div class="row">
+    <div class="col-md-2 sidebar p-2 border-end">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="navbar-brand text-white" href="/secure/dashboard"> &nbsp; {{appinfo.appname}} </a><img class="float-right" src="" 
+                :width="appinfo.logoWidth" :height="appinfo.logoHeight"  alt=" ">
+            </div>
+        <div class="col-md-12 mt-4 text-center">
+            <div class="dp mt-2 mx-auto"></div>
+        <big>Welcome, {{userdata['surname']}} </big>
+        <big class="text-black">{{userdata['businessName']}} </big>
+        </div>
+        </div>
+
+      <ul class="navbar-nav sidebar-list mt-4">
+        <li class="nav-item active"><router-link to="/secure/dashboard" class="nav-link"><i class="bi-house" style="font-size: 1.1rem; "></i> Dashboard </router-link></li>
+        <hr>
+        <!-- <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-credit-card" style="font-size: 1.1rem;"></i> Subscriptions </router-link></li>
+        <li class="nav-item active"><router-link to="#" class="nav-link text-warning"> <strong>Free services</strong> </router-link></li>
+        
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-house-fill" style="font-size: 1.1rem;"></i> Production details </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-credit-card-2-front" style="font-size: 1.1rem;"></i> Financial statistics </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-cloud" style="font-size: 1.1rem;"></i> Temperature checks </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-mailbox" style="font-size: 1.1rem;"></i> Reports </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-house" style="font-size: 1.1rem;"></i> Your farms </router-link></li>
+        <hr>
+        <li class="nav-item active"><router-link to="#" class="nav-link text-warning"> <strong>Premium services</strong> </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-camera-video" style="font-size: 1.1rem;"></i> Live stream </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-people" style="font-size: 1.1rem;"></i> Join community </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-people" style="font-size: 1.1rem;"></i> Hire experts </router-link></li>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-bar-chart-steps" style="font-size: 1.1rem;"></i> Suggestions </router-link></li>
+        <hr>
+        <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-gear" style="font-size: 1.1rem;"></i> Settings </router-link></li>
+       -->
+
+    </ul>
+      <ul class="navbar-nav sidebar-list mt-2" v-for="(d, index) in menus" :key="index">
+    <li class="nav-item"><router-link :to="'/secure/'+d['menuName']" class="nav-link"><i :class="d['menu_icon']" style="font-size: 1.1rem;"></i> {{d['menu_description']}} </router-link></li>
+   </ul>
+   
+    <ul class="navbar-nav sidebar-list mt-2">
+    <li class="nav-item"><router-link to="/site/logout" class="nav-link "><i class="bi-power" style="font-size: 1.1rem;"></i> Logout </router-link></li>
+   </ul>
+</div>
+<div class="col-md-10 offset-md-2 maindiv">
+<section v-if="ifUserHasAccess=='true'">
+    <slot></slot>
+</section>
+<section v-else>
+   <div class="container-fluid">
+       <div class="row mt-5 text-center ">
+           <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
+   <p class="lead mt-2 text-danger" style="line-height:1.5">{{norecord}}</p>
+           </div>
+ <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
+<p class="m-2" @click="$router.go(-1)" :style="'display:'+backbtn"><a href="#" class="btn btn-outline-primary text-center">  <i class="bi-arrow-left"></i> Back </a></p>
+           </div>
+       </div>
+   </div>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section v-else>
+   <div class="container-fluid mt-5">
+       <div class="row mt-5 text-center ">
+           <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
+   <p class="lead mt-2 text-danger" style="line-height:1.5">{{norecord}}</p>
+           </div>
+ <div class="col-8 mt-5 mx-auto d-flex justify-content-center">
+<p class="m-2" @click="$router.go(-1)" :style="'display:'+backbtn"><a href="#" class="btn btn-outline-primary text-center">  <i class="bi-arrow-left"></i> Back </a></p>
+           </div>
+       </div>
+   </div>
+</section>
+
+
+</div>
+</template>
+
+
+<style scoped>
+.sidebar, .header{
+    /* background: #3cba54; */
+    background: #010314;
+    color: #fff;
+}
+.sidebar, .header a, li{
+color: #fff;
+}
+.sidebar-list a{ 
+color: #fff;
+
+}
+.sidebar-list a i{ 
+color: rgb(231, 235, 29);
+
+}
+.list-group-item{
+    padding-left:4px;
+}
+
+.list-group-item i{
+    margin-right: 5px;
+}
+.userlink{
+    text-decoration: none;
+    color: rgb(59, 56, 56);
+}
+.active{
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
+</style>
+<script>
+import appsettings from '../json/myapp.json'
+import axios from 'axios'
+export default {
+    data(){
+        return {
+            info:[],
+            userdata:[],
+            menus:[],
+            "media":appsettings.media,
+            "appinfo":appsettings.appinfo,
+            networkerror:appsettings.error.networkerror,
+            progress:null,
+            accountActive:false,
+            ifUserHasAccess:false,
+            userid:null,
+            page: '',
+            pwd:'',
+            classname:'',
+            isDisabled: false,
+            error_btn: null,
+            errormodal: null,
+            record:false,
+            norecord:'',
+            loader:false,
+            loaderstatus:'',
+            backbtn:'none',
+            counter:'0',
+            pagename: this.$route.name,
+            opacity_enable:'opacity:0.5; pointer-events:None;',
+            opacity_disable:'opacity:1; pointer-events:All;',
+            opacity:'',
+            }
+    },
+        created(){
+        this.setStorage()
+        this.auth_check()
+        },
+    methods:{
+       setStorage: function(){
+            localStorage.setItem('error', this.networkerror)
+        },
+     listmenu: function(){
+            this.$Progress.start()
+            this.isDisabled = true
+            this.opacity = this.opacity_enable
+        axios.get('/api/admin_menus/',{
+            params:{
+
+                'pagename':this.pagename
+            }
+        })
+        .then(response => {
+            if(response.data.status == response.data.statusmsg){
+            this.norecord=response.data.msg
+            this.alert=''
+            this.classname=''
+            this.menus = response.data.result
+            this.ifUserHasAccess=response.data.ifUserHasAccess
+            this.accountActive = true
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            }else{
+            this.alert=''
+            this.norecord=response.data.msg
+            this.classname=''
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            }
+        
+        }).catch(()=>{
+            this.backbtn='block'
+            this.alert=''
+            this.classname=''
+            this.norecord=localStorage.getItem('error')
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+        })
+    },
+
+    auth_check: function(){
+    this.$Progress.start()
+    this.isDisabled = true
+    this.opacity = this.opacity_enable
+    axios.get('/auth/auth_check/')
+        .then(response => {
+            if(response.data.status==response.data.statusmsg){
+                this.userdata = response.data.userdata
+                this.accountActive = true
+                this.$Progress.finish()
+                this.isDisabled = false
+                this.opacity = this.opacity_disable
+                this.listmenu()
+                localStorage.setItem("userdata", response.data.userdata);
+                }else{
+                this.$Progress.finish()
+                this.isDisabled = false
+                this.opacity = this.opacity_disable
+                this.accountActive = false
+                localStorage.removeItem('userdata');
+                window.location.href='/site/logout'
+            }
+        }).catch(()=>{
+            this.$Progress.finish()
+            this.isDisabled = false
+            this.opacity = this.opacity_disable
+            this.accountActive = false
+            this.alert = localStorage.getItem('error')
+            localStorage.removeItem("userdata");
+            window.location.href='/site/logout'
+        })
+    },
+
+
+
+    },
+
+}
+</script>
