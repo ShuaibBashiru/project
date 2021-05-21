@@ -1,9 +1,0 @@
-flask
-pandas
-numpy
-xlrd
-opencv-python
-exifread
-libmysqlclient-dev
-Werkzeug
-
