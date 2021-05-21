@@ -40,7 +40,7 @@
 #                 feedback = {
 #                     'status': 'Failed',
 #                     'msg': 'Terminated',
-#                     'classname': 'alert alert-danger p-1 text-center',
+#                     'classname': 'alert-danger',
 #                 }
 #                 return JsonResponse(feedback, safe=False)
 #
@@ -64,7 +64,7 @@
 #                 'status': 'success',
 #                 'statusmsg': 'success',
 #                 'msg': 'Image captured',
-#                 'classname': 'alert alert-primary p-1 text-center',
+#                 'classname': 'alert-primary',
 #             }
 #         else:
 #             feedback = {

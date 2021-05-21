@@ -132,7 +132,7 @@ export default{
                 this.linearinfo=response.data
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -148,7 +148,7 @@ export default{
                 this.mixedinfo=response.data
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -164,7 +164,7 @@ export default{
                 this.gradientinfo=response.data
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -181,7 +181,7 @@ export default{
                 this.psoinfo=response.data
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -197,7 +197,7 @@ export default{
                 this.gradientinfo=response.data
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })

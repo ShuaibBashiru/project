@@ -166,7 +166,7 @@ export default {
                 }
             }
                 ).then(response => {
-                if(response.data.status == response.data.confirmed){
+                if(response.data.status == response.data.statusmsg){
                 this.alert=''
                 this.classname=''
                 this.userinfo = response.data.result
@@ -182,7 +182,7 @@ export default {
                 }
                
             }).catch(()=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert='Error connecting, please try again' 
 
             })
@@ -199,7 +199,7 @@ export default {
                 }
             })
             .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
                 this.alert=''
                 this.classname=''
                 this.invoiceInfo = response.data.result
@@ -209,7 +209,7 @@ export default {
                 this.classname=response.data.classname
                 }
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })

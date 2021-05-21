@@ -45,7 +45,7 @@ def validate_password_id(request):
             'statusmsg': 'error',
             'msg': 'Something went wrong or this record no longer exist. '
                    'Kindly try again using forgotten password.',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
     finally:
         cursor.close()

@@ -218,7 +218,7 @@ export default{
                 }
             }
                 ).then(response => {
-                if(response.data.status == response.data.confirmed){
+                if(response.data.status == response.data.statusmsg){
                 this.alert=''
                 this.classname=''
                 this.userinfo = response.data.result
@@ -236,7 +236,7 @@ export default{
                 }
                
             }).catch(()=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert='Error connecting, please try again' 
 
             })
@@ -247,7 +247,7 @@ export default{
             this.alert='Pleast wait....'
             axios.get('/api/get_drug_list/')
             .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
                 this.alert=''
                 this.classname=''
                 this.list_items = response.data.result
@@ -256,7 +256,7 @@ export default{
                 this.classname=response.data.classname
                 }
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -272,7 +272,7 @@ export default{
         form.append('csrfmiddlewaretoken', this.token)
         axios.post('/auth/addservice/', form)
         .then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.classname=response.data.classname
         this.alert=response.data.msg
         this.submit="Add"
@@ -284,7 +284,7 @@ export default{
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Error connecting, please try again.'
         this.submit="Add"
     })  
@@ -301,7 +301,7 @@ export default{
                 }
             })
             .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
                 this.alert=''
                 this.classname=''
                 this.invoiceInfo = response.data.result
@@ -311,7 +311,7 @@ export default{
                 this.classname=response.data.classname
                 }
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -323,7 +323,7 @@ export default{
     form.append('token', Math.random(9,99999))
     axios.get('/auth/tokenize/',form, {
     }).then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.token=response.data.key
         axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
         }else{
@@ -331,7 +331,7 @@ export default{
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Error connecting, please try again.'
 
     })

@@ -67,7 +67,7 @@
                     <input type="text" name="title" v-model="title" maxlength="100" class="form-control" required placeholder="Name this widget for quick reference">
                 </div>
                 <small class="form-text text-muted"></small>
-                <small class="text-danger">{{err_title}}</small>
+                <small class="text-danger"></small>
                 
                 </div>
             </div>
@@ -186,7 +186,7 @@ export default {
         form.append('csrfmiddlewaretoken', this.token)
         axios.post('/posts/widget/', form)
         .then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.classname=response.data.classname
         this.alert=response.data.msg
         this.submit="Submit"
@@ -199,7 +199,7 @@ export default {
         this.preview()
     }).catch(()=>{
         this.loader=false
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert=localStorage.getItem('error')
         this.submit="Submit"
     })  
@@ -209,7 +209,7 @@ export default {
         this.loader = true
         axios.get('/api/widget/')
         .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
             this.alert=''
             this.classname=''
             this.info = response.data.result
@@ -221,7 +221,7 @@ export default {
 
         }).catch(()=>{
             this.loader=false
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert=localStorage.getItem('error')
         })
     },
@@ -231,7 +231,7 @@ export default {
     form.append('token', Math.random(9,99999))
     axios.get('/auth/tokenize/',form, {
     }).then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.token=response.data.key
         axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
         }else{
@@ -239,7 +239,7 @@ export default {
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
        this.alert=localStorage.getItem('error')
 
     })

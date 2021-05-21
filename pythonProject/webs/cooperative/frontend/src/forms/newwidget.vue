@@ -2,10 +2,10 @@
 <template>
 <div :style="opacity">
 <AdminHeader>
-    <div class="container">
+    <div class="container mt-2">
         <div class="row">
-            <div class="col m-2 mt-0 mb-1">
-            <div v-bind:class="classname">{{alert}}</div>
+            <div class="col">
+            <div v-bind:class="'alert '+ classname + ' p-2 text-center'">{{alert}}</div>
             </div>
         </div>
     </div>
@@ -62,10 +62,10 @@
                 <div class="m-1">
                 <div class="input-group">
                      <span class="input-group-text">Title</span>
-                    <input type="text" name="title" v-model="title" class="form-control" required placeholder="Name this widget for quick reference">
+                    <input type="text" name="title" v-model="title" class="form-control" required placeholder="Type here">
                 </div>
                 <small class="form-text text-muted"></small>
-                <small class="text-danger">{{err_title}}</small>
+                <small class="text-danger"></small>
                 
                 </div>
             </div>
@@ -104,15 +104,8 @@ export default {
         alert: null,
         alertmodal: null,
         error: '',
-        info: [],
-        checked: true,
-        list_id: [],
-        get_list_array: '0',
-        listStatus:null,
-        selectToggleValue: '',
-        selectedlist: null,
-        isChecked:false,
-        loader: false,
+        title: null,
+        widget: null,
         loadermodal: false,
         selectDefault:"Select",
         classname: null,
@@ -136,10 +129,10 @@ export default {
 
     methods:{
       formCheck: function(e){
-        this.addwidget()
+        this.addNew()
     e.preventDefault();
     },
-    addwidget: function(){
+    addNew: function(){
         this.$Progress.start()
         this.isDisabled = true
         this.opacity = this.opacity_enable
@@ -148,9 +141,9 @@ export default {
         form.append('widget', this.widget)
         form.append('title', this.title)
         form.append('csrfmiddlewaretoken', this.token)
-        axios.post('/posts/widget/', form)
+        axios.post('/posts/widget/new/', form)
         .then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.classname=response.data.classname
         this.alert=response.data.msg
         this.submit=this.submittxt
@@ -166,7 +159,7 @@ export default {
         this.opacity = this.opacity_disable
         }
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert=localStorage.getItem('error')
         this.submit=this.submittxt
         this.$Progress.fail()
@@ -175,7 +168,7 @@ export default {
     })  
     },
 
-    tokenize: function(){
+   tokenize: function(){
         this.$Progress.start()
       this.isDisabled = true
     axios.get('/auth/tokenize/',{
@@ -183,7 +176,7 @@ export default {
       'token': Math.random(9, 9999)
     }
   }).then(response => {
-      if(response.data.status==response.data.confirmed){
+      if(response.data.status==response.data.statusmsg){
       this.token=response.data.key
       axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
       this.$Progress.finish()
@@ -191,17 +184,18 @@ export default {
       }else{
       this.$Progress.finish()
       this.isDisabled = false
-      this.classname='alert alert-danger p-1 text-center'
+     this.classname='text-danger'
       this.alert=localStorage.getItem('error')
       }
     
   }).catch(()=>{
       this.$Progress.fail()
       this.isDisabled = false
-      this.classname='alert alert-danger p-1 text-center'
+      this.classname='text-danger'
       this.alert=localStorage.getItem('error')
   })
   },
+
 
     },
 

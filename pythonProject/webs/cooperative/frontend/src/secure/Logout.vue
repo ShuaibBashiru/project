@@ -51,7 +51,7 @@ created(){
              this.$Progress.start()
           axios.get('/auth/logout/')
         .then(response => {
-            if(response.data.status==response.data.confirmed){
+            if(response.data.status==response.data.statusmsg){
                 this.message = response.data.msg
                 this.error_found = false
                 localStorage.removeItem('userdata');

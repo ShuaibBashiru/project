@@ -303,7 +303,7 @@ export default {
                 this.$Progress.fail()
             this.isDisabled = false
             this.opacity = this.opacity_disable 
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Error connecting, please try again.'
         this.submit=this.submittxt
     })  

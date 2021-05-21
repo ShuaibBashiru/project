@@ -103,7 +103,7 @@ export default{
                 this.alert=response.data.msg
                 this.classname=response.data.classname
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -123,7 +123,7 @@ export default{
                 }
                
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -141,7 +141,7 @@ export default{
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Kindly refresh or try again later.'
 
     })

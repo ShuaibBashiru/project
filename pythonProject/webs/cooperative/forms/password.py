@@ -27,7 +27,7 @@ def update_password(request):
             'msg': 'Oops! You are making an '
                    'invalid request, kindly refresh '
                    'or check our knowledge base for possible solution.',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
         return JsonResponse(feedback, safe=False)
 
@@ -60,14 +60,14 @@ def update_password(request):
             'statusmsg': 'success',
             'msg': 'Your password has been changed successfully, log in to continue',
             'redirect': '/site/signin/',
-            'classname': 'alert alert-primary p-1 text-center'
+            'classname': 'alert-primary'
         }
     else:
         feedback = {
             'status': 'Failed',
             'statusmsg': 'error',
              'msg': 'Something went wrong, please try again later.',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
 
     return JsonResponse(feedback, safe=False)
@@ -91,21 +91,21 @@ def validate_email_id(request):
                         'statusmsg': 'success',
                         'msg': 'New record was created successfully! now redirecting..',
                         'redirect': '/site/newpassword/' + str(request.POST['email']).lower() + '/' + code,
-                        'classname': 'alert alert-primary p-1 text-center'
+                        'classname': 'alert-primary'
                     }
                 else:
                     feedback = {
                         'status': 'failed',
                         'statusmsg': 'error',
                         'msg': 'We could not process mail notification request right now, please try again later',
-                        'classname': 'alert alert-danger p-1 text-center',
+                        'classname': 'alert-danger',
                     }
 
             else:
                 feedback = {
                    'status': 'failed',
                    'msg': 'The account email provided do not exist with us, please try again or create an account',
-                   'classname': 'alert alert-danger p-1 text-center'
+                   'classname': 'alert-danger'
                     }
     except Exception as e:
         write_error('Forgot password', e)
@@ -114,7 +114,7 @@ def validate_email_id(request):
             'statusmsg': 'error',
             'msg': 'Something went wrong or this record no longer exist. '
                    'Kindly try again using forgotten password.',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
     finally:
         cursor.close()

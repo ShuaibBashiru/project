@@ -1,0 +1,256 @@
+from django.http import JsonResponse, HttpResponse
+from django.core.files.storage import FileSystemStorage
+import pandas as pd
+import os
+import time
+import json
+import sys
+import serial
+import random
+import datetime
+import numpy as np
+from django.db import connection, transaction
+from authentication.query_columns import dictfetchall
+from .admin_menu_models import AddNewMenu
+from .admin_menu_models import AddMenuAccess
+from authentication.writer import write_error
+
+
+current_file = 'Admin_Menu_forms'
+
+
+def addNew(request):
+    success = 0
+    failed = 0
+    exist = 0
+    keyid = request.POST['menuname']
+    if request.method != 'POST':
+        feedback = {
+            'status': 'Invalid request',
+            'statusmsg': 'error',
+            'msg': 'Oops! You are making an '
+                   'invalid request, kindly refresh '
+                   'or check our knowledge base for possible solution.',
+            'classname': 'alert-danger',
+        }
+        return JsonResponse(feedback, safe=False)
+
+    else:
+        try:
+            with connection.cursor() as cursor:
+                counter = cursor.execute("SELECT menuName FROM admin_menus WHERE menuName =%s", [keyid, ])
+
+                if counter > 0:
+                    exist += 1
+                else:
+                    gettime = datetime.datetime.now()
+                    save_record = AddNewMenu()
+                    save_record.category = request.POST['category'].capitalize()
+                    save_record.menuName = request.POST['menuname'].lower()
+                    save_record.menu_icon = request.POST['menuicon']
+                    save_record.menu_description = request.POST['menuname'].capitalize()
+                    save_record.uniqueCode = int(round(time.time() * 1000))
+                    save_record.created_by = request.session['userdata']['id']
+                    save_record.modified_by = request.session['userdata']['id']
+                    save_record.status_id = 0
+                    save_record.record_status = 1
+                    save_record.date_created = str(datetime.date.today())
+                    save_record.time_created = str(datetime.time(gettime.hour, gettime.minute, gettime.second))
+                    save_record.date_modified = str(datetime.date.today())
+                    save_record.time_modified = str(datetime.time(gettime.hour, gettime.minute, gettime.second))
+                    save_record.save()
+                    success += 1
+        except Exception as e:
+            failed += 1
+            write_error(current_file, e)
+
+    if success > 0:
+        feedback = {
+            'status': 'success',
+            'statusmsg': 'success',
+            'msg': 'New record was created successfully!',
+            'classname': 'alert-primary'
+        }
+    elif exist > 0:
+        feedback = {
+            'status': 'failed',
+            'statusmsg': 'error',
+            'msg': 'New record provided already exist or still in Trash, kindly '
+                   'check your records to confirm this or try another.',
+            'classname': 'alert-danger'
+        }
+    else:
+        feedback = {
+            'status': 'failed',
+            'statusmsg': 'error',
+            'msg': 'Something went wrong! refresh and try again or contact support',
+            'classname': 'alert-danger',
+        }
+
+    return JsonResponse(feedback, safe=False)
+
+
+def update(request):
+    success = 0
+    failed = 0
+    if request.method != 'POST':
+        feedback = {
+            'status': 'Invalid request',
+            'statusmsg': 'error',
+            'msg': 'Oops! You are making an '
+                   'invalid request, kindly refresh '
+                   'or check our knowledge base for possible solution.',
+            'classname': 'alert-danger',
+        }
+        return JsonResponse(feedback, safe=False)
+
+    else:
+        try:
+            gettime = datetime.datetime.now()
+            date_modified = str(datetime.date.today())
+            time_modified = str(datetime.time(gettime.hour, gettime.minute, gettime.second))
+            modified_by = request.session['userdata']['id']
+            menuName = request.POST['menuname']
+            menu_icon = request.POST['menuicon']
+            status_id = 0
+            keyid = request.POST['keyid']
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "UPDATE admin_menus SET menuName=%s, menu_icon=%s,  status_id=%s, "
+                    "modified_by=%s, date_modified=%s, time_modified=%s "
+                    "WHERE id=%s ",
+                    [menuName, menu_icon, status_id, modified_by, date_modified, time_modified, keyid])
+                transaction.commit()
+                updated = cursor.rowcount
+                if updated > 0:
+                    success += 1
+                else:
+                    failed += 1
+        except Exception as e:
+            failed += 1
+            write_error(current_file, e)
+
+    if success > 0:
+        feedback = {
+            'status': 'success',
+            'statusmsg': 'success',
+            'msg': 'Record updated successfully.',
+            'classname': 'alert-primary'
+        }
+    else:
+        feedback = {
+            'status': 'Failed',
+            'msg': 'Something went wrong or this record no longer exist. '
+                   'Kindly confirm this update and try again.',
+            'classname': 'alert-danger',
+        }
+
+    return JsonResponse(feedback, safe=False)
+
+
+def update_status(request):
+    success = 0
+    failed = 0
+    if request.method != 'POST':
+        feedback = {
+            'status': 'Invalid request',
+            'statusmsg': 'error',
+            'msg': 'Oops! You are making an '
+                   'invalid request, kindly refresh '
+                   'or check our knowledge base for possible solution.',
+            'classname': 'alert-danger',
+        }
+        return JsonResponse(feedback, safe=False)
+
+    else:
+        try:
+            gettime = datetime.datetime.now()
+            date_modified = str(datetime.date.today())
+            time_modified = str(datetime.time(gettime.hour, gettime.minute, gettime.second))
+            modified_by = request.session['userdata']['id']
+            status_id = request.POST['listStatus']
+            array_id = request.POST['keyid']
+            lists = array_id.split(",")
+            with connection.cursor() as cursor:
+                for keyid in lists:
+                    cursor.execute("UPDATE admin_menus SET status_id=%s, "
+                                   "modified_by=%s, date_modified=%s, "
+                                   "time_modified=%s WHERE id=%s ",
+                                   [status_id, modified_by, date_modified, time_modified, keyid])
+                    transaction.commit()
+                    updated = cursor.rowcount
+                    if updated > 0:
+                        success += 1
+                    else:
+                        failed += 1
+        except Exception as e:
+            failed += 1
+            write_error(current_file, e)
+
+    if success > 0:
+        feedback = {
+            'status': 'success',
+            'statusmsg': 'success',
+            'msg': '{} Record updated successfully.'.format(success),
+            'classname': 'alert-primary'
+        }
+    else:
+        feedback = {
+            'status': 'Failed',
+            'statusmsg': 'error',
+            'msg': 'Something went wrong or this record no longer exist. '
+                   'Kindly confirm this update and try again.',
+            'classname': 'alert-danger',
+        }
+
+    return JsonResponse(feedback, safe=False)
+
+
+def delete(request):
+    success = 0
+    failed = 0
+    if request.method != 'POST':
+        feedback = {
+            'status': 'Invalid request',
+            'statusmsg': 'error',
+            'msg': 'Oops! You are making an '
+                   'invalid request, kindly refresh '
+                   'or check our knowledge base for possible solution.',
+            'classname': 'alert-danger',
+        }
+        return JsonResponse(feedback, safe=False)
+
+    else:
+        try:
+            keyid = request.POST['keyid']
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "UPDATE admin_menus SET status_id=%s, record_status=%s "
+                    "WHERE id=%s ", [0, 0, keyid])
+                transaction.commit()
+                deleted = cursor.rowcount
+                if deleted > 0:
+                    success += 1
+                else:
+                    failed += 1
+        except Exception as e:
+            failed += 1
+            write_error(current_file, e)
+
+    if success > 0:
+        feedback = {
+            'status': 'success',
+            'statusmsg': 'success',
+            'msg': 'This record has been deleted and no longer exist,'
+                   ' use the menu below to go back.',
+            'classname': 'alert-danger'
+        }
+    else:
+        feedback = {
+            'status': 'Failed',
+            'statusmsg': 'error',
+            'msg': 'Oops! This record no longer exist use the menu below to go back.',
+            'classname': 'alert-danger',
+        }
+
+    return JsonResponse(feedback, safe=False)

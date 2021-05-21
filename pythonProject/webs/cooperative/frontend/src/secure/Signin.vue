@@ -16,7 +16,7 @@
 </div>
 
 <div class="form-group col">
-    <p v-bind:class="classname">{{alert}}</p>
+    <p v-bind:class="'text-center '+ classname">{{alert}}</p>
 </div>
 
     <div class="form-group mt-4 col">
@@ -113,14 +113,14 @@ methods:{
       }else{
       this.$Progress.finish()
       this.isDisabled = false
-     this.classname='text-danger p-1 text-center'
+     this.classname='text-danger'
       this.alert=localStorage.getItem('error')
       }
     
   }).catch(()=>{
       this.$Progress.fail()
       this.isDisabled = false
-      this.classname='text-danger p-1 text-center'
+      this.classname='text-danger'
       this.alert=localStorage.getItem('error')
   })
   },
@@ -158,7 +158,7 @@ methods:{
               
             }).catch(()=>{
                 this.alert=localStorage.getItem('error')
-                this.classname='text-danger p-1 text-center'
+                this.classname='text-danger'
                 this.button=this.btntxt
                 this.$Progress.fail()
                 this.isDisabled = false

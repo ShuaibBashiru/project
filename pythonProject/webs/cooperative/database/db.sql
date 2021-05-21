@@ -230,7 +230,7 @@ INSERT INTO `admin_priviledges` (`id`, `menu_id`, `user_id`,
  `menu_description`, `uniqueCode`, `status_id`,
 `record_status`, `created_by`, `modified_by`, `date_created`,
   `time_created`, `date_modified`, `time_modified`)
-  VALUES (NULL, '2', '1', NULL, '544324213115', '1', '1', '1', '1', '2021-04-07',
+  VALUES (NULL, '2', '1', NULL, '544324213115', '1', '1', '1',  '1', '2021-04-07',
   '11:34:10', '2021-04-07', '11:34:10');
 
 

@@ -48,12 +48,12 @@ def drug_list_func(request):
         feedback = {
             'status': 'success',
             'msg': 'Your info was uploaded successfully',
-            'classname': 'alert alert-primary p-1 text-center',
+            'classname': 'alert-primary',
         }
     else:
         feedback = {
             'status': 'Failed',
             'msg': 'Your data was not uploaded successfully',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
     return feedback

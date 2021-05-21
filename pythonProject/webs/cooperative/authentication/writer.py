@@ -15,6 +15,6 @@ def write_error(name, e):
                 'status': 'Invalid request',
                 'msg': 'Oops! Technical issue, kindly contact'
                        ' our support desk to report this case. Thanks',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
     return JsonResponse(feedback, safe=False)

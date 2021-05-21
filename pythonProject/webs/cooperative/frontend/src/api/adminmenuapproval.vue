@@ -2,10 +2,10 @@
 <template>
 <div :style="opacity">
 <AdminHeader>
-    <div class="container">
+    <div class="container mt-2">
         <div class="row">
-            <div class="col m-2 mt-0 mb-1">
-            <div v-bind:class="classname">{{alert}}</div>
+            <div class="col">
+            <div v-bind:class="'alert '+ classname + ' p-2 text-center'">{{alert}}</div>
             </div>
         </div>
     </div>
@@ -22,15 +22,28 @@
 <div class="btn-group m-2" title="" role="group" aria-label="First group"><a href="/secure/newwidget" class="btn btn-outline-primary text-center">  <i class="bi-plus" style="font-size: 1rem;"></i> New </a></div>
 <div class="btn-group m-2" title="Menu" role="group" aria-label="First group"><a href="#" class="btn btn-outline-secondary text-center dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Menu </a>
   <ul class="dropdown-menu">
-    <li class="p-2 pb-0 pt-0"><strong>Records</strong> </li>
+    <li class="p-2 pb-0 pt-0"><strong><a href="#">Records</a></strong> </li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="listcounter">Update status</a></li>
     <li><hr class="dropdown-divider"></li>
-    <li class="p-2 pb-0 pt-0"><strong>Download</strong> </li>
+    <li class="p-2 pb-0 pt-0"><strong><a href="#">Download</a></strong> </li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="#" @click="downloadfile" data-bs-toggle="modal" data-bs-target="#downloadbox">Excel</a></li>
   </ul></div>
-<div class="btn-group m-2" title="Refresh" role="group" aria-label="First group"><a href="#" class="btn btn-outline-primary text-center" @click="preview">  <i class="bi-arrow-clockwise" style="font-size: 1rem;"></i> </a></div>
+<div class="btn-group m-2" title="Refresh" role="group" aria-label="First group">
+    <div class="input-group">
+        <select name="displayNumber" v-model="displayNumber" class="form-control">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="1">All</option>
+        </select>
+        <span class="input-group-text" @click="preview"><i class="bi-arrow-clockwise" style="font-size: 1rem;"></i></span>
+    </div>
+    </div>
 
 </div>
 
@@ -104,22 +117,20 @@
                         <tr>
                             <!-- <th><div class="form-check"><input type="checkbox" @click="selectToggle(this)" v-model="selectToggleValue" class="form-check-input"></div></th> -->
                             <th><i class="bi-check-square btn p-0 text-primary"></i></th>
+                            <th>User</th>
                             <th>Name</th>
-                            <th>Title</th>
                             <th>Last Modified</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Edit</th>
                             <th class="text-center">Delete</th>
                         </tr>
                         <tr v-for="(d, index) in info" :key="index">
                             <td> <div class="form-check"><input type="checkbox" name="checkbox" :id="d['id']" :value="d['id']" v-model="list_id" class="form-check-input"></div> </td>
-                            <td>{{d['widgetName']}}</td>
-                            <td>{{d['widgetTitle']}}</td>
+                            <td>{{d['email_one']}} </td>
+                            <td>{{d['menu_description']}}</td>
                             <td>{{d['date_modified']}} {{d['time_modified']}}</td>
                             <td class="text-center" v-if="d['status_id']==1"> <i class="bi-check-square btn p-0 text-primary"></i></td>
                             <td class="text-center" v-else> <i class="bi-x-square btn p-0 text-danger"></i></td>
-                            <td class="text-center"> <a :href="'/secure/updatewidget/'+d['widgetTitle']+'/'+d['uniqueCode']+'?category='+d['widgetName']"><i class="bi-pencil-square btn p-0 text-primary"></i> </a></td>
-                            <td class="text-center"> <a :href="'/secure/deletewidget/'+d['widgetTitle']+'/'+d['uniqueCode']+'?category='+d['widgetName']"><i class="bi-trash btn p-0 text-danger"></i> </a></td>
+                            <td class="text-center"> <a :href="'/secure/deleteadminmenu/'+d['menuName']+'/'+d['id']"><i class="bi-trash btn p-0 text-danger"></i> </a></td>
                         </tr>
                     </thead>
                 </table>
@@ -148,7 +159,9 @@
       <div class="modal-body">
                    <div class="row">
             <div class="col-md-12">
-                <div class="col m-2 mt-0 mb-1"><div v-bind:class="classnamemodal">{{alertmodal}}</div></div>
+                <div class="col m-1 mt-0 mb-1">
+                    <div v-bind:class="'alert '+ classnamemodal + ' p-2 text-center'">{{alertmodal}}</div>
+                    </div>
                 <div class="m-1">
                     <input type="hidden" class="form-control d-none" v-model="token" required readonly>
                     <input type="hidden" class="form-control d-none" v-model="get_list_array">
@@ -234,7 +247,8 @@ export default {
         checked: true,
         list_id: [],
         get_list_array: '0',
-        listStatus:null,
+        listStatus:'',
+        displayNumber:10,
         selectToggleValue: '',
         selectedlist: null,
         isChecked:false,
@@ -283,9 +297,9 @@ export default {
         form.append('listStatus', this.listStatus)
         form.append('keyid', this.get_list_array)
         form.append('csrfmiddlewaretoken', this.token)
-        axios.post('/posts/update_widget_status/', form)
+        axios.post('/posts/adminmenuapproval/update_status/', form)
         .then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.classnamemodal=response.data.classname
         this.alertmodal=response.data.msg
         this.submit=this.submittxt
@@ -302,7 +316,7 @@ export default {
 
         }
     }).catch(()=>{
-        this.classnamemodal='alert alert-danger p-1 text-center'
+        this.classnamemodal='alert-danger'
         this.alertmodal=localStorage.getItem('error')
         this.submit=this.submittxt
         this.$Progress.fail()
@@ -311,7 +325,7 @@ export default {
     })  
     },
 
-    tokenize: function(){
+   tokenize: function(){
         this.$Progress.start()
       this.isDisabled = true
     axios.get('/auth/tokenize/',{
@@ -319,34 +333,37 @@ export default {
       'token': Math.random(9, 9999)
     }
   }).then(response => {
-      if(response.data.status==response.data.confirmed){
+      if(response.data.status==response.data.statusmsg){
       this.token=response.data.key
       axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
-        this.$Progress.finish()
+      this.$Progress.finish()
       this.isDisabled = false
       }else{
-      this.$Progress.fail()
+      this.$Progress.finish()
       this.isDisabled = false
-      this.classname='alert alert-danger p-1 text-center'
+     this.classname='text-danger text-center'
       this.alert=localStorage.getItem('error')
       }
     
   }).catch(()=>{
-        this.$Progress.finish()
+      this.$Progress.fail()
       this.isDisabled = false
-      this.classname='alert alert-danger p-1 text-center'
+      this.classname='text-danger text-center'
       this.alert=localStorage.getItem('error')
   })
   },
-
 
     preview: function(){
         this.$Progress.start()
         this.isDisabled = true
         this.opacity = this.opacity_enable
-        axios.get('/api/widget/',{})
+        axios.get('/api/adminmenuapproval/list/',{
+            params:{
+                limitTo: this.displayNumber
+            }
+        })
         .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
             this.alert=''
             this.classname=''
             this.info = response.data.result
@@ -370,7 +387,7 @@ export default {
             this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert=localStorage.getItem('error')
             this.$Progress.fail()
             this.isDisabled = true
@@ -382,13 +399,13 @@ export default {
         this.$Progress.start()
         this.isDisabled = true
         this.opacity = this.opacity_enable
-       axios.get('/api/widgetfilter/', {
+       axios.get('/api/adminmenuapproval/filter/', {
             params:{
                 'status_id': this.filterlist
             }
         })
         .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
             this.alert=''
             this.classname=''
             this.info = response.data.result
@@ -412,7 +429,7 @@ export default {
             this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert=localStorage.getItem('error')
             this.$Progress.fail()
             this.isDisabled = true
@@ -423,13 +440,13 @@ export default {
         this.$Progress.start()
         this.isDisabled = true
         this.opacity = this.opacity_enable
-       axios.get('/api/widgetsearch/', {
+       axios.get('/api/adminmenuapproval/search/', {
             params:{
                 'search': this.search
             }
         })
         .then(response => {
-            if(response.data.status == response.data.confirmed){
+            if(response.data.status == response.data.statusmsg){
             this.alert=''
             this.classname=''
             this.info = response.data.result
@@ -453,7 +470,7 @@ export default {
             this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert=localStorage.getItem('error')
             this.$Progress.fail()
             this.isDisabled = true
@@ -473,13 +490,13 @@ export default {
         this.$Progress.start()
         this.isDisabled = true
         this.downloadmsg='Please wait...'
-        axios.get('/api/download_widget/', {
+        axios.get('/api/adminmenuapproval/download/', {
             params:{
                 "filetype":"excel"
             }
         },  this.loader=true, this.loaderstatus='block')
         .then(response => {
-           if(response.data.status == response.data.confirmed){
+           if(response.data.status == response.data.statusmsg){
             this.alert=''
             this.classname=''
             this.record = true

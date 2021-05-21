@@ -199,7 +199,7 @@ export default {
         this.preview()
     }).catch(()=>{
         this.loader=false
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Check network connection or reload this page'
         this.submit="Submit"
     })  
@@ -221,7 +221,7 @@ export default {
 
         }).catch(()=>{
             this.loader=false
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert='Check network connection or reload this page'
         })
     },
@@ -239,7 +239,7 @@ export default {
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
        this.alert='Check network connection or reload this page'
 
     })

@@ -236,7 +236,7 @@ export default{
                 }
                
             }).catch(()=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert='Error connecting, please try again' 
 
             })
@@ -256,7 +256,7 @@ export default{
                 this.classname=response.data.classname
                 }
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -284,7 +284,7 @@ export default{
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Error connecting, please try again.'
         this.submit="Add"
     })  
@@ -311,7 +311,7 @@ export default{
                 this.classname=response.data.classname
                 }
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })
@@ -331,7 +331,7 @@ export default{
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Error connecting, please try again.'
 
     })

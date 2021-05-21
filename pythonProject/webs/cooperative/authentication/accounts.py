@@ -13,7 +13,7 @@ def create_acccount(request):
             'msg': 'Invalid request, try again',
             'row': '',
             'redirect': '/',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
         return JsonResponse(feedback, safe=False)
     else:
@@ -32,7 +32,7 @@ def create_acccount(request):
                 'confirmed': 'success',
                 'msg': 'Authentication successful, redirecting..',
                 'redirect': '/',
-                'classname': 'alert alert-primary p-1 text-center',
+                'classname': 'alert-primary',
             }
             return JsonResponse(feedback, safe=False)
         except:
@@ -40,7 +40,7 @@ def create_acccount(request):
                 'status': 'unidentified',
                 'msg': 'Technical error, Please try again',
                 'redirect': '/',
-                'classname': 'alert alert-danger p-1 text-center'
+                'classname': 'alert-danger'
             }
 
             return JsonResponse(feedback, safe=False)

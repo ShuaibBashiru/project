@@ -10,12 +10,12 @@ import string
 import random
 import numpy as np
 from django.db import connection, transaction
-from .models import AddAccount
+from .admin_account_models import AddNewAccount
 from authentication.writer import write_error
 from mailer.newpassword_mailer import new_password_mailer
 
 
-def add_account(request):
+def addNew(request):
     success = 0
     failed = 0
     business_name = request.POST['businessName']
@@ -28,14 +28,14 @@ def add_account(request):
                 'msg': 'Oops! You are making an '
                        'invalid request, kindly refresh '
                        'or check our knowledge base for possible solution.',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
         return JsonResponse(feedback, safe=False)
 
     else:
         try:
             gettime = datetime.datetime.now()
-            save_record = AddAccount()
+            save_record = AddNewAccount()
             save_record.surname = request.POST['surname']
             save_record.firstname = request.POST['firstname']
             save_record.language_code = request.POST['languageCode']
@@ -66,7 +66,7 @@ def add_account(request):
                 'statusmsg': 'success',
                 'msg': 'New record was created successfully! now redirecting..',
                 'redirect': '/site/newpassword/' + str(request.POST['email']).lower() + '/' + code,
-                'classname': 'alert alert-primary p-1 text-center'
+                'classname': 'alert-primary'
             }
 
         else:
@@ -74,7 +74,7 @@ def add_account(request):
                 'status': 'failed',
                 'statusmsg': 'error',
                 'msg': 'We could not process mail notification request right now, please try again later',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
     else:
         feedback = {
@@ -82,7 +82,7 @@ def add_account(request):
             'statusmsg': 'error',
             'msg': 'Something went wrong! It is like this record already exist, '
                    'Kindly check our knowledge base for possible solution.',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
 
     return JsonResponse(feedback, safe=False)

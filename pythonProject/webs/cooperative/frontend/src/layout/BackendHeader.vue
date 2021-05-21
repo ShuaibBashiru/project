@@ -21,11 +21,13 @@
             <div class="dp mt-2 mx-auto"></div>
         <big>Welcome, {{userdata['surname']}} </big>
         <big class="text-black">{{userdata['businessName']}} </big>
+        <small class="text-black">Administrator</small>
+
         </div>
         </div>
 
       <ul class="navbar-nav sidebar-list mt-4">
-        <li class="nav-item active"><router-link to="/secure/dashboard" class="nav-link"><i class="bi-house" style="font-size: 1.1rem; "></i> Dashboard </router-link></li>
+        <li class="nav-item active"><router-link to="/secure/dashboard" class="nav-link"><i class="bi-house m-2 ml-0 mt-0 mb-0" style="font-size: 1.1rem; "></i> Dashboard </router-link></li>
         <hr>
         <!-- <li class="nav-item"><router-link to="/secure/dashboard" class="nav-link "><i class="bi-credit-card" style="font-size: 1.1rem;"></i> Subscriptions </router-link></li>
         <li class="nav-item active"><router-link to="#" class="nav-link text-warning"> <strong>Free services</strong> </router-link></li>
@@ -47,14 +49,14 @@
 
     </ul>
       <ul class="navbar-nav sidebar-list mt-2" v-for="(d, index) in menus" :key="index">
-    <li class="nav-item"><router-link :to="'/secure/'+d['menuName']" class="nav-link"><i :class="d['menu_icon']" style="font-size: 1.1rem;"></i> {{d['menu_description']}} </router-link></li>
+    <li class="nav-item"><router-link :to="'/secure/'+d['menuName']" class="nav-link"><i :class="'m-2 ml-0 mt-0 mb-0 '+d['menu_icon']" style="font-size: 1.1rem;"></i> {{d['menu_description']}} </router-link></li>
    </ul>
-   
+    
     <ul class="navbar-nav sidebar-list mt-2">
-    <li class="nav-item"><router-link to="/site/logout" class="nav-link "><i class="bi-power" style="font-size: 1.1rem;"></i> Logout </router-link></li>
+    <li class="nav-item"><router-link to="/site/logout" class="nav-link "><i class="m-2 ml-0 mt-0 mb-0 bi-power" style="font-size: 1.1rem;"></i> Logout </router-link></li>
    </ul>
 </div>
-<div class="col-md-10 offset-md-2 maindiv">
+<div class="col-md-10 offset-md-2 maindiv  p-0">
 <section v-if="ifUserHasAccess=='true'">
     <slot></slot>
 </section>
@@ -94,13 +96,10 @@
 
 <style scoped>
 .sidebar, .header{
-    /* background: #3cba54; */
     background: #010314;
     color: #fff;
 }
-.sidebar, .header a, li{
-color: #fff;
-}
+
 .sidebar-list a{ 
 color: #fff;
 
@@ -171,7 +170,7 @@ export default {
             this.$Progress.start()
             this.isDisabled = true
             this.opacity = this.opacity_enable
-        axios.get('/api/admin_menus/',{
+        axios.get('/api/adminmenu/menus/',{
             params:{
 
                 'pagename':this.pagename

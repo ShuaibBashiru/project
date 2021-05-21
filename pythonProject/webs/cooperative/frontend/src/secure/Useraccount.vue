@@ -289,7 +289,7 @@ export default {
         form.append('csrfmiddlewaretoken', this.token)
     axios.post('/auth/useraccount/', form)
         .then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.classname=response.data.classname
         this.alert=response.data.msg
         this.submit="Submit"
@@ -300,7 +300,7 @@ export default {
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Error connecting, please try again.'
         this.submit="Submit"
     })  
@@ -310,7 +310,7 @@ export default {
     form.append('token', Math.random(9,99999))
     axios.get('/auth/tokenize/',form, {
     }).then(response => {
-        if(response.data.status==response.data.confirmed){
+        if(response.data.status==response.data.statusmsg){
         this.token=response.data.key
         axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.key;
         }else{
@@ -318,7 +318,7 @@ export default {
         }
         
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
        this.alert='Error connecting, please try again.'
 
     })

@@ -302,7 +302,7 @@ export default {
 
         }
     }).catch(()=>{
-        this.classnamemodal='alert alert-danger p-1 text-center'
+        this.classnamemodal='alert-danger'
         this.alertmodal='Check network connection or reload this page'
         this.submit=this.submittxt
         this.$Progress.fail()
@@ -327,14 +327,14 @@ export default {
       }else{
       this.$Progress.fail()
       this.isDisabled = false
-      this.classname='alert alert-danger p-1 text-center'
+      this.classname='alert-danger'
       this.alert='Check network connection or reload this page'
       }
     
   }).catch(()=>{
         this.$Progress.finish()
       this.isDisabled = false
-      this.classname='alert alert-danger p-1 text-center'
+      this.classname='alert-danger'
       this.alert='Check network connection or reload this page'
   })
   },
@@ -370,7 +370,7 @@ export default {
             this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert='Check network connection or reload this page'
             this.$Progress.fail()
             this.isDisabled = true
@@ -412,7 +412,7 @@ export default {
             this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert='Check network connection or reload this page'
             this.$Progress.fail()
             this.isDisabled = true
@@ -453,7 +453,7 @@ export default {
             this.record = false
             this.norecord=''
             this.counter = 'Total: 0'
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert='Check network connection or reload this page'
             this.$Progress.fail()
             this.isDisabled = true

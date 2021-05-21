@@ -1,3 +1,3 @@
 
-{From: widget_list, Date: 2021-05-15 15:00:49.781028, message: name 'loaderstatus' is not defined}__error_log__
-{From: Menu, Date: 2021-05-16 11:56:28.261081, message: name 'pageexit' is not defined}__error_log__
+{From: Admin_Approval_list, Date: 2021-05-19 18:03:42.473899, message: not all arguments converted during bytes formatting}__error_log__
+{From: Admin_Approval_list, Date: 2021-05-19 18:06:22.013621, message: not all arguments converted during bytes formatting}__error_log__

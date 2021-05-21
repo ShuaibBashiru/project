@@ -70,7 +70,7 @@ export default{
             axios.get('/api/admin_record/'
 
             ).then(response => {
-               if(response.data.status == response.data.confirmed){
+               if(response.data.status == response.data.statusmsg){
                 this.alert=''
                 this.classname=''
                 this.info = response.data.result
@@ -81,7 +81,7 @@ export default{
                 }
                
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert=error
 
             })

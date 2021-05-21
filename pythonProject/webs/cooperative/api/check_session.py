@@ -13,7 +13,7 @@ def session_on_request():
                 'msg': 'Error connecting, now redirecting...',
                 'row': '',
                 'redirect': '/site/logout',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
             return JsonResponse(feedback, safe=False)
     except:
@@ -22,7 +22,7 @@ def session_on_request():
             'msg': 'Error connecting, now redirecting...',
             'row': '',
             'redirect': '/site/logout',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
         return JsonResponse(feedback, safe=False)
 

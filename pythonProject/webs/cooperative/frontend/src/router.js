@@ -85,7 +85,7 @@ routes:[
     path: '/secure/widgets',
     name:'Widgets',
     meta:{title:'Widgets'},
-    component: ()=> import('./api/Widgets.vue'),
+    component: ()=> import('./api/widgets.vue'),
 },
 {
     path: '/secure/updatewidget/:title/:id',
@@ -106,11 +106,47 @@ routes:[
 // Priviledges
 
 {
-    path: '/secure/pageaccess',
-    name:'pageaccess',
-    meta:{title:'Page access'},
-    component: ()=> import('./forms/Pageaccess.vue'),
+    path: '/secure/adminmenuaccess',
+    name:'adminmenuaccess',
+    meta:{title:'Admin menu access'},
+    component: ()=> import('./forms/adminmenuaccess.vue'),
 },
+
+{
+    path: '/secure/adminmenuapproval',
+    name:'adminmenuapproval',
+    meta:{title:'Admin menu approval'},
+    component: ()=> import('./api/adminmenuapproval.vue'),
+},
+
+{
+    path: '/secure/adminnewmenu',
+    name:'adminnewmenu',
+    meta:{title:'Admin new menu'},
+    component: ()=> import('./forms/adminnewmenu.vue'),
+},
+{
+    path: '/secure/adminmenus',
+    name:'adminmenus',
+    meta:{title:'Menus'},
+    component: ()=> import('./api/adminmenus.vue'),
+},
+{
+    path: '/secure/updateadminmenu/:title/:id',
+    name:'updateadminmenu',
+    meta:{title:'Update menu'},
+    component: ()=> import('./formsupdate/updateadminmenu.vue'),
+},
+
+{
+    path: '/secure/deleteadminmenu/:title/:id',
+    name:'deleteadminmenu',
+    meta:{title:'Delete menu'},
+    component: ()=> import('./formsdelete/deleteadminmenu.vue'),
+ 
+},
+
+// end
 
 
 ]

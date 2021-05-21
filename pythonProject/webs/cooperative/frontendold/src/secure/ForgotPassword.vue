@@ -139,7 +139,7 @@ export default {
             }
         }).catch(()=>{
             this.record = false
-            this.classname='alert alert-danger p-1 text-center'
+            this.classname='alert-danger'
             this.alert='Check network connection or reload this page'
             this.$Progress.fail()
             this.isDisabled = false

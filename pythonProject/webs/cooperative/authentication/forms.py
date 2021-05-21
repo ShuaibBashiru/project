@@ -13,7 +13,7 @@ def user_account(request):
         feedback = {
             'status': 'Invalid request',
             'msg': 'Invalid request, please try again',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
     else:
         success = 0
@@ -55,13 +55,13 @@ def user_account(request):
                 'status': 'success',
                 'confirmed': 'success',
                 'msg': 'Account successfully created',
-                'classname': 'alert alert-primary p-1 text-center',
+                'classname': 'alert-primary',
             }
         else:
             feedback = {
                 'status': 'Failed',
                 'msg': 'Your request was not successful, please try again',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
     return JsonResponse(feedback, safe=False)
 
@@ -71,7 +71,7 @@ def admin_account(request):
         feedback = {
             'status': 'Invalid request',
             'msg': 'Invalid request, please try again',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
     else:
         success = 0
@@ -109,13 +109,13 @@ def admin_account(request):
                 'status': 'success',
                 'confirmed': 'success',
                 'msg': 'Account successfully created',
-                'classname': 'alert alert-primary p-1 text-center',
+                'classname': 'alert-primary',
             }
         else:
             feedback = {
                 'status': 'Failed',
                 'msg': 'Your request was not successful, please try again',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
     return JsonResponse(feedback, safe=False)
 
@@ -125,7 +125,7 @@ def add_service(request):
         feedback = {
             'status': 'Invalid request',
             'msg': 'Invalid request, please try again',
-            'classname': 'alert alert-danger p-1 text-center',
+            'classname': 'alert-danger',
         }
     else:
         success = 0
@@ -161,13 +161,13 @@ def add_service(request):
                 'status': 'success',
                 'confirmed': 'success',
                 'msg': 'Service was successful added',
-                'classname': 'alert alert-primary p-1 text-center',
+                'classname': 'alert-primary',
             }
         else:
             feedback = {
                 'status': 'Failed',
                 'msg': 'Your request was not successful, please try again',
-                'classname': 'alert alert-danger p-1 text-center',
+                'classname': 'alert-danger',
             }
     return JsonResponse(feedback, safe=False)
 

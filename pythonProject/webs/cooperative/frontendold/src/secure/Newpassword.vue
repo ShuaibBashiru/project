@@ -216,7 +216,7 @@ export default {
         this.opacity = this.opacity_disable
         }
     }).catch(()=>{
-        this.classname='alert alert-danger p-1 text-center'
+        this.classname='alert-danger'
         this.alert='Check network connection or reload this page'
         this.submit=this.submittxt
         this.$Progress.fail()

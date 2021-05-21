@@ -87,7 +87,7 @@ export default{
                 this.classname=response.data.classname
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert="Error: " + error
 
             })
@@ -106,7 +106,7 @@ export default{
                 this.fileurl='../assets/passport'
                 console.log(response)
             }).catch((error)=>{
-                this.classname='alert alert-danger p-1 text-center'
+                this.classname='alert-danger'
                 this.alert="Error: " + error
 
             })
